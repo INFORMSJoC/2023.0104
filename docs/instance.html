@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problem instance &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f9d500d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Solution representation" href="solution.html" />
+    <link rel="prev" title="Custom problem settings" href="custom_problem_settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RoutingBlocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_operators.html">Custom operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_problem_settings.html">Custom problem settings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Problem instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#routingblocks.Vertex"><code class="docutils literal notranslate"><span class="pre">Vertex</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Vertex.vertex_id"><code class="docutils literal notranslate"><span class="pre">Vertex.vertex_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Vertex.str_id"><code class="docutils literal notranslate"><span class="pre">Vertex.str_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Vertex.is_station"><code class="docutils literal notranslate"><span class="pre">Vertex.is_station</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Vertex.is_depot"><code class="docutils literal notranslate"><span class="pre">Vertex.is_depot</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Vertex.is_customer"><code class="docutils literal notranslate"><span class="pre">Vertex.is_customer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Vertex.data"><code class="docutils literal notranslate"><span class="pre">Vertex.data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#routingblocks.Arc"><code class="docutils literal notranslate"><span class="pre">Arc</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Arc.data"><code class="docutils literal notranslate"><span class="pre">Arc.data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#routingblocks.Instance"><code class="docutils literal notranslate"><span class="pre">Instance</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.__init__"><code class="docutils literal notranslate"><span class="pre">Instance.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">Instance.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">Instance.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.fleet_size"><code class="docutils literal notranslate"><span class="pre">Instance.fleet_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.number_of_customers"><code class="docutils literal notranslate"><span class="pre">Instance.number_of_customers</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.number_of_stations"><code class="docutils literal notranslate"><span class="pre">Instance.number_of_stations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.number_of_vertices"><code class="docutils literal notranslate"><span class="pre">Instance.number_of_vertices</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.depot"><code class="docutils literal notranslate"><span class="pre">Instance.depot</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.vertices"><code class="docutils literal notranslate"><span class="pre">Instance.vertices</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.stations"><code class="docutils literal notranslate"><span class="pre">Instance.stations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.customers"><code class="docutils literal notranslate"><span class="pre">Instance.customers</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.__len__"><code class="docutils literal notranslate"><span class="pre">Instance.__len__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.__iter__"><code class="docutils literal notranslate"><span class="pre">Instance.__iter__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.get_vertex"><code class="docutils literal notranslate"><span class="pre">Instance.get_vertex()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.get_customer"><code class="docutils literal notranslate"><span class="pre">Instance.get_customer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.get_station"><code class="docutils literal notranslate"><span class="pre">Instance.get_station()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.Instance.get_arc"><code class="docutils literal notranslate"><span class="pre">Instance.get_arc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder.set_depot"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder.set_depot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder.add_customer"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder.add_customer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder.add_station"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder.add_station()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder.add_arc"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder.add_arc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder.number_of_vertices"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder.number_of_vertices</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder.reset"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.utility.InstanceBuilder.build"><code class="docutils literal notranslate"><span class="pre">InstanceBuilder.build()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adptw.html">ADPTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="niftw.html">NIFTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribution opportunities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks class index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RoutingBlocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Problem instance</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/instance.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="problem-instance">
+<h1>Problem instance<a class="headerlink" href="#problem-instance" title="Link to this heading"></a></h1>
+<p>Problem instance classes represent the problem to be solved. They model the underlying graph and store problem-specific
+data. The following classes are available:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.Vertex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">Vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_depot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Vertex" title="Link to this definition"></a></dt>
+<dd><p>A simple vertex object that represents a location vehicles can visit. Vertices can be stations, depots or customers.
+Each vertex has a unique id and a human-readable string identifier. The vertex also stores additional data transparent
+to the RoutingBlocks package. This data can be used to store additional information about the vertex, such as time windows,
+demand, prizes, or any other attribute that is relevant to the problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertex_id</strong> (<em>int</em>) – The unique identifier of the vertex.</p></li>
+<li><p><strong>str_id</strong> (<em>str</em>) – A human-readable string identifier for the vertex.</p></li>
+<li><p><strong>is_station</strong> (<em>bool</em>) – Whether the vertex is a station.</p></li>
+<li><p><strong>is_depot</strong> (<em>bool</em>) – Whether the vertex is a depot.</p></li>
+<li><p><strong>data</strong> (<em>Any</em>) – Additional data associated with the vertex.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.Vertex.vertex_id">
+<span class="sig-name descname"><span class="pre">vertex_id</span></span><a class="headerlink" href="#routingblocks.Vertex.vertex_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.Vertex.str_id">
+<span class="sig-name descname"><span class="pre">str_id</span></span><a class="headerlink" href="#routingblocks.Vertex.str_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.Vertex.is_station">
+<span class="sig-name descname"><span class="pre">is_station</span></span><a class="headerlink" href="#routingblocks.Vertex.is_station" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.Vertex.is_depot">
+<span class="sig-name descname"><span class="pre">is_depot</span></span><a class="headerlink" href="#routingblocks.Vertex.is_depot" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Vertex.is_customer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_customer</span></span><a class="headerlink" href="#routingblocks.Vertex.is_customer" title="Link to this definition"></a></dt>
+<dd><p>Determines if the vertex is a customer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the vertex is a customer, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Vertex.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#routingblocks.Vertex.data" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the vertex data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The data associated with the vertex.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.Arc">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">Arc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Arc" title="Link to this definition"></a></dt>
+<dd><p>A simple arc object that represents a connection between two vertices in a graph. The arc stores additional data
+transparent to the RoutingBlocks package. This data can be used to store additional information about the arc, such as
+distances, durations, or any other attributes relevant to the problem being modeled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Any</em>) – Additional data associated with the arc.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Arc.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#routingblocks.Arc.data" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the arc data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The data associated with the arc.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.Instance">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">Instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fleet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Instance" title="Link to this definition"></a></dt>
+<dd><p>Represents an instance of a vehicle routing problem. The instance contains a collection of vertices (depot, stations,
+and customers), a matrix of arcs connecting the vertices, and a fleet size representing the number of vehicles available.
+Provides convenient methods to access and iterate through the various types of vertices.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommend to use the <a class="reference internal" href="#instance-builder"><span class="std std-ref">InstanceBuilder</span></a> to create instances.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertices</strong> (<em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a><em>]</em>) – A list of vertices in the order depot, stations, customers</p></li>
+<li><p><strong>arcs</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a><em>]</em><em>]</em>) – A list of lists of Arc objects representing the connections between vertices</p></li>
+<li><p><strong>fleet_size</strong> (<em>int</em>) – The number of vehicles in the fleet</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.Instance.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fleet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#routingblocks.Instance.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize an Instance with a depot, lists of stations and customers, a list of arcs, and a fleet size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depot</strong> (<a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The depot vertex</p></li>
+<li><p><strong>stations</strong> (<em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a><em>]</em>) – A list of station vertices</p></li>
+<li><p><strong>customers</strong> (<em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a><em>]</em>) – A list of customer vertices</p></li>
+<li><p><strong>arcs</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a><em>]</em><em>]</em><em>]</em>) – A matrix of Arc objects representing the connections between vertices</p></li>
+<li><p><strong>fleet_size</strong> (<em>int</em>) – The number of vehicles in the fleet</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Initialize an Instance with a list of vertices and a list of arcs. Sets the fleet size to the number of customers. Expects vertices to be in the order depot, stations, customers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertices</strong> (<em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a><em>]</em>) – A list of vertices in the order depot, stations, customers</p></li>
+<li><p><strong>arcs</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a><em>]</em><em>]</em>) – A list of lists of Arc objects representing the connections between vertices</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fleet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Initialize an Instance with a list of vertices, a list of arcs, and a fleet size. Expects vertices to be in the order depot, stations, customers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertices</strong> (<em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a><em>]</em>) – A list of vertices in the order depot, stations, customers</p></li>
+<li><p><strong>arcs</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a><em>]</em><em>]</em>) – A list of lists of Arc objects representing the connections between vertices</p></li>
+<li><p><strong>fleet_size</strong> (<em>int</em>) – The number of vehicles in the fleet</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.fleet_size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fleet_size</span></span><a class="headerlink" href="#routingblocks.Instance.fleet_size" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the number of vehicles available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The fleet size.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.number_of_customers">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_customers</span></span><a class="headerlink" href="#routingblocks.Instance.number_of_customers" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the number of customers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of customers.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.number_of_stations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_stations</span></span><a class="headerlink" href="#routingblocks.Instance.number_of_stations" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the number of stations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of stations.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.number_of_vertices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_vertices</span></span><a class="headerlink" href="#routingblocks.Instance.number_of_vertices" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the number of vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of vertices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.depot">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depot</span></span><a class="headerlink" href="#routingblocks.Instance.depot" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the depot vertex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The depot vertex.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.vertices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertices</span></span><a class="headerlink" href="#routingblocks.Instance.vertices" title="Link to this definition"></a></dt>
+<dd><p>Retrieves an iterator over the instance’s vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator over the instance’s vertices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterator[<a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.stations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stations</span></span><a class="headerlink" href="#routingblocks.Instance.stations" title="Link to this definition"></a></dt>
+<dd><p>Retrieves an iterator over the station vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator over the station vertices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterator[<a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.Instance.customers">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">customers</span></span><a class="headerlink" href="#routingblocks.Instance.customers" title="Link to this definition"></a></dt>
+<dd><p>Retrieves an iterator over the customer vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator over the customer vertices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterator[<a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.Instance.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Instance.__len__" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the number of vertices in the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of vertices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.Instance.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Instance.__iter__" title="Link to this definition"></a></dt>
+<dd><p>Retrieves an iterator over the vertices in the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator over the vertices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Iterator[<a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.Instance.get_vertex">
+<span class="sig-name descname"><span class="pre">get_vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Instance.get_vertex" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a vertex by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – The ID of the desired vertex.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The vertex with the specified ID.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.Instance.get_customer">
+<span class="sig-name descname"><span class="pre">get_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Instance.get_customer" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the n-th customer vertex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer_index</strong> (<em>int</em>) – The index of the desired customer vertex.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The customer vertex at the specified index.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.Instance.get_station">
+<span class="sig-name descname"><span class="pre">get_station</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">station_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Instance.get_station" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the n-th station vertex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>station_index</strong> (<em>int</em>) – The index of the desired station vertex.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The station vertex at the specified index.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.Instance.get_arc">
+<span class="sig-name descname"><span class="pre">get_arc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_vertex_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_vertex_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Instance.get_arc" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the arc connecting two vertices, specified by their IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_vertex_id</strong> (<em>int</em>) – The ID of the source vertex.</p></li>
+<li><p><strong>target_vertex_id</strong> (<em>int</em>) – The ID of the target vertex.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The arc connecting the source and target vertices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc">Arc</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>The <a class="reference internal" href="#instance-builder"><span class="std std-ref">instance builder</span></a> is a utility class that can be used to create instances. It takes
+care of ordering, ensures unique vertex IDs, and validates consistency. The following example illustrates it’s usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">routingblocks</span> <span class="kn">import</span> <span class="n">InstanceBuilder</span><span class="p">,</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">Arc</span>
+
+<span class="k">class</span> <span class="nc">MyVertexData</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">MyArcData</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Default factories use the constructors of Vertex and Arc. Use custom factories to create Vertex/Arc representations.</span>
+<span class="c1"># optimized for specific problem settings (e.g., `create_adtpw_vertex` and `create_adtpw_arc` for ADTPW)</span>
+<span class="n">builder</span> <span class="o">=</span> <span class="n">InstanceBuilder</span><span class="p">()</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">fleet_size</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_depot</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">MyVertexData</span><span class="p">())</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_customer</span><span class="p">(</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">MyVertexData</span><span class="p">())</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_customer</span><span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="n">MyVertexData</span><span class="p">())</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_station</span><span class="p">(</span><span class="s2">&quot;S1&quot;</span><span class="p">,</span> <span class="n">MyVertexData</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;S1&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;S1&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">]):</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_arc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">MyArcData</span><span class="p">())</span>
+
+<span class="n">instance</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py class" id="instance-builder">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.utility.</span></span><span class="sig-name descname"><span class="pre">InstanceBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">create_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">vertex_factory</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_arc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">arc_factory</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder" title="Link to this definition"></a></dt>
+<dd><p>A class for building an instance of a vehicle routing problem. The builder provides methods to add vertices (depot,
+customers, and stations) and arcs with their associated data. Once all the necessary data has been added, the builder
+can create an instance of the problem.</p>
+<p>Initializes a new InstanceBuilder object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>create_vertex</strong> (<em>Optional</em><em>[</em><em>vertex_factory</em><em>]</em>) – A factory function for creating vertex objects. Defaults to the constructor of the Vertex class.</p></li>
+<li><p><strong>create_arc</strong> (<em>Optional</em><em>[</em><em>arc_factory</em><em>]</em>) – A factory function for creating arc objects. Defaults to the constructor of the Arc class.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder.set_depot">
+<span class="sig-name descname"><span class="pre">set_depot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder.set_depot" title="Link to this definition"></a></dt>
+<dd><p>Sets the depot for the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str_id</strong> (<em>str</em>) – The string identifier for the depot.</p></li>
+<li><p><strong>vertex_data</strong> – Additional data associated with the depot vertex.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder.add_customer">
+<span class="sig-name descname"><span class="pre">add_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder.add_customer" title="Link to this definition"></a></dt>
+<dd><p>Adds a customer to the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str_id</strong> (<em>str</em>) – The string identifier for the customer.</p></li>
+<li><p><strong>vertex_data</strong> – Additional data associated with the customer vertex.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder.add_station">
+<span class="sig-name descname"><span class="pre">add_station</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder.add_station" title="Link to this definition"></a></dt>
+<dd><p>Adds a station to the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str_id</strong> (<em>str</em>) – The string identifier for the station.</p></li>
+<li><p><strong>vertex_data</strong> – Additional data associated with the station vertex.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder.add_arc">
+<span class="sig-name descname"><span class="pre">add_arc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arc_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder.add_arc" title="Link to this definition"></a></dt>
+<dd><p>Adds an arc between two vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>str</em>) – The string identifier for the source vertex.</p></li>
+<li><p><strong>j</strong> (<em>str</em>) – The string identifier for the target vertex.</p></li>
+<li><p><strong>arc_data</strong> – Additional data associated with the arc.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder.number_of_vertices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_vertices</span></span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder.number_of_vertices" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the number of vertices in the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of vertices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the InstanceBuilder, clearing all stored data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.utility.InstanceBuilder.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.utility.InstanceBuilder.build" title="Link to this definition"></a></dt>
+<dd><p>Constructs an Instance object based on the vertices and arcs added to the InstanceBuilder.
+Uses vertex_factory and arc_factory to create the vertices and arcs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new Instance object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#routingblocks.Instance" title="routingblocks.Instance">Instance</a></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the InstanceBuilder does not have a depot or at least one customer.</p></li>
+<li><p><strong>ValueError</strong> – If not all arcs are defined between vertices.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">vertex_factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VertexID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_depot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_station</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></span></dt>
+<dd><p>Function signature for a vertex_factory. Creates a new vertex using the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – Unique ID of the vertex</p></li>
+<li><p><strong>str_id</strong> – Name of the vertex</p></li>
+<li><p><strong>is_depot</strong> – Whether the vertex is a depot</p></li>
+<li><p><strong>is_station</strong> – Whether the vertex is a station</p></li>
+<li><p><strong>data</strong> – User-defined data to be stored in the vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new Vertex object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">arc_factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a></span></span></dt>
+<dd><p>Function signature for a arc_factory. Creates a new arc with the given data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – User-defined data to be stored in the arc</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new Arc object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="custom_problem_settings.html" class="btn btn-neutral float-left" title="Custom problem settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solution.html" class="btn btn-neutral float-right" title="Solution representation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 - 2023, Patrick Sean Klein.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

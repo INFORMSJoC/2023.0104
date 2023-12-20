@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluation &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f9d500d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Local search" href="localsearch.html" />
+    <link rel="prev" title="Solution representation" href="solution.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RoutingBlocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_operators.html">Custom operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_problem_settings.html">Custom problem settings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="instance.html">Problem instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Evaluation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.concatenate"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.concatenate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.compute_cost"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.compute_cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.evaluate"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.create_backward_label"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.create_backward_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.create_forward_label"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.create_forward_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.get_cost_components"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.get_cost_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.is_feasible"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.is_feasible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.propagate_forward"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.propagate_forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyConcatenationBasedEvaluation.propagate_backward"><code class="docutils literal notranslate"><span class="pre">PyConcatenationBasedEvaluation.propagate_backward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#routingblocks.PyEvaluation"><code class="docutils literal notranslate"><span class="pre">PyEvaluation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.compute_cost"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.compute_cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.evaluate"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.create_backward_label"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.create_backward_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.create_forward_label"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.create_forward_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.get_cost_components"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.get_cost_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.is_feasible"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.is_feasible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.propagate_forward"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.propagate_forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.PyEvaluation.propagate_backward"><code class="docutils literal notranslate"><span class="pre">PyEvaluation.propagate_backward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluate_insertion"><code class="docutils literal notranslate"><span class="pre">evaluate_insertion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">evaluate_insertion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">evaluate_insertion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#routingblocks.evaluate_splice"><code class="docutils literal notranslate"><span class="pre">evaluate_splice()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adptw.html">ADPTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="niftw.html">NIFTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribution opportunities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks class index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RoutingBlocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Evaluation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/evaluation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="evaluation">
+<span id="id1"></span><h1>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading"></a></h1>
+<p>The evaluation class implements problem-specific cost and move evaluation functions. It’s design bases on the
+concepts introduced in <span id="id2">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<p>Note that this class is an interface: it’s not meant to be instantiated or used directly. Please use the concrete
+implementations of this interface and helper functions instead. See e.g. <a class="reference internal" href="adptw.html#adptw"><span class="std std-ref">ADPTW</span></a> or <a class="reference internal" href="niftw.html#niftw"><span class="std std-ref">NIFTW</span></a> for examples of
+concrete implementations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We recommend implementing a custom Evaluation class by extending the native RoutingBlocks library instead of providing a python implementation for code used beyond prototyping. See <a class="reference external" href="https://github.com/tumBAIS/routingblocks-native-extension-example">native extensions</a> for an example.</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">PyConcatenationBasedEvaluation</span></span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation" title="Link to this definition"></a></dt>
+<dd><p>The evaluation class implements problem-specific cost and move evaluation functions. It’s design bases on the
+concepts introduced in <span id="id3">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.
+Note that this class is an interface: it’s not meant to be instantiated or used directly. Please use the concrete
+implementations of this interface and helper functions instead.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.concatenate">
+<span class="sig-name descname"><span class="pre">concatenate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bwd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyBackwardLabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.concatenate" title="Link to this definition"></a></dt>
+<dd><p>Specialization of the general evaluation member of <span class="xref std std-ref">PyEvaluation</span> for cases where two route subsequences can
+be concatenated efficiently. Classes who extend this class do not need to implement <span class="xref std std-ref">PyEvaluation.evaluate</span>.</p>
+<p>The concatenation function works as follows:
+Assume that we have two route subsequences <code class="docutils literal notranslate"><span class="pre">[v_1,</span> <span class="pre">...,</span> <span class="pre">v_n]</span></code> and <code class="docutils literal notranslate"><span class="pre">[v_{n+1},</span> <span class="pre">...,</span> <span class="pre">v_m]</span></code>. The specialized evaluation
+function first propagates v_n to v_{n+1}, and the calls <code class="docutils literal notranslate"><span class="pre">concatenate(fwd_{n+1},</span> <span class="pre">bwd_{n+1},</span> <span class="pre">v_{n+1})</span></code> where <code class="docutils literal notranslate"><span class="pre">fwd_{n+1}</span></code> is the
+forward label of <code class="docutils literal notranslate"><span class="pre">v_{n+1}</span></code> and <code class="docutils literal notranslate"><span class="pre">bwd_{n+1}</span></code> is the backward label of <code class="docutils literal notranslate"><span class="pre">v_{n+1}</span></code>.</p>
+<p>If the specialized evaluation function is called with several route sub-sequences
+<code class="docutils literal notranslate"><span class="pre">[...,</span> <span class="pre">v_n],</span> <span class="pre">[v_n+1,</span> <span class="pre">...</span> <span class="pre">v_{n+m}],</span> <span class="pre">[v_{n+m+1},</span> <span class="pre">...]</span></code> then the first sequence is extended to v_{n+m} and the
+operation reduces to the first case:
+<code class="docutils literal notranslate"><span class="pre">concatenate(fwd_{n+m+1},</span> <span class="pre">bwd_{n+m+1},</span> <span class="pre">v_{n+m+1})</span></code> where <code class="docutils literal notranslate"><span class="pre">fwd_{n+m+1}</span></code> is the forward label of <code class="docutils literal notranslate"><span class="pre">v_{n+m+1}</span></code> and <code class="docutils literal notranslate"><span class="pre">bwd_{n+m+1}</span></code> is the backward label of <code class="docutils literal notranslate"><span class="pre">v_{n+m+1}</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fwd</strong> (<em>AnyForwardLabel</em>) – The forward label representing the route sub-sequence <code class="docutils literal notranslate"><span class="pre">[v_1,</span> <span class="pre">...,</span> <span class="pre">v_n,</span> <span class="pre">v_{n+1}]</span></code></p></li>
+<li><p><strong>bwd</strong> (<em>AnyBackwardLabel</em>) – The backward label representing the route sub-sequence <code class="docutils literal notranslate"><span class="pre">[v_{n+1},</span> <span class="pre">...,</span> <span class="pre">v_m]</span></code></p></li>
+<li><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex <code class="docutils literal notranslate"><span class="pre">v_{n+1}</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the route <code class="docutils literal notranslate"><span class="pre">[v_1,</span> <span class="pre">...,</span> <span class="pre">v_n,</span> <span class="pre">v_{n+1},</span> <span class="pre">...,</span> <span class="pre">v_m]</span></code></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.compute_cost">
+<span class="sig-name descname"><span class="pre">compute_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.compute_cost" title="Link to this definition"></a></dt>
+<dd><p>Computes the cost of a given label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>AnyForwardLabel</em>) – The label</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">segments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">AnyForwardLabel</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">AnyBackwardLabel</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the cost of the route given by concatenating the passed route sub-sequences. Each sub-sequences is
+guaranteed to have valid forward and backward labels.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">EVALN</span></code> in <span id="id4">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance</p></li>
+<li><p><strong>segments</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>Tuple</em><em>[</em><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a><em>, </em><em>AnyForwardLabel</em><em>, </em><em>AnyBackwardLabel</em><em>]</em><em>]</em><em>]</em>) – A list of route sub-sequences, each given as a list of tuples of (vertex, forward label, backward label)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the route</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.create_backward_label">
+<span class="sig-name descname"><span class="pre">create_backward_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.create_backward_label" title="Link to this definition"></a></dt>
+<dd><p>Creates and initializes a backward label for the given vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">INIT</span></code> in <span id="id5">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex representing singleton route [vertex]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The initialized backward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyBackwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.create_forward_label">
+<span class="sig-name descname"><span class="pre">create_forward_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.create_forward_label" title="Link to this definition"></a></dt>
+<dd><p>Creates and initializes a forward label for the given vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">INIT</span></code> in <span id="id6">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex representing singleton route [vertex]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The initialized backward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyBackwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.get_cost_components">
+<span class="sig-name descname"><span class="pre">get_cost_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.get_cost_components" title="Link to this definition"></a></dt>
+<dd><p>Returns the cost components of a given label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>AnyForwardLabel</em>) – The label</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost components of the label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.is_feasible">
+<span class="sig-name descname"><span class="pre">is_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.is_feasible" title="Link to this definition"></a></dt>
+<dd><p>Checks whether a given label is feasible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>AnyForwardLabel</em>) – The label</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the label is feasible, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.propagate_forward">
+<span class="sig-name descname"><span class="pre">propagate_forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.propagate_forward" title="Link to this definition"></a></dt>
+<dd><p>Extends the partial route represented by the forward label of pred_vertex to the vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">FORW([...,</span> <span class="pre">pred_vertex]⊕[vertex])</span></code> in <span id="id7">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred_label</strong> (<em>AnyForwardLabel</em>) – The forward label of the predecessor vertex</p></li>
+<li><p><strong>pred_vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The predecessor vertex</p></li>
+<li><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex</p></li>
+<li><p><strong>arc</strong> (<a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a>) – The arc connecting pred_vertex and vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The propagated forward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyForwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyConcatenationBasedEvaluation.propagate_backward">
+<span class="sig-name descname"><span class="pre">propagate_backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">succ_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyBackwardLabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">succ_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyConcatenationBasedEvaluation.propagate_backward" title="Link to this definition"></a></dt>
+<dd><p>Extends the partial route represented by the backward label of succ_vertex to the vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">BACK([vertex]⊕[succ_vertex,</span> <span class="pre">...])</span></code> in <span id="id8">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>succ_label</strong> (<em>AnyBackwardLabel</em>) – The backward label of the successor vertex</p></li>
+<li><p><strong>succ_vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The successor vertex</p></li>
+<li><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex</p></li>
+<li><p><strong>arc</strong> (<a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a>) – The arc connecting succ_vertex to vertex. Note that this corresponds to the reverse arc of the forward direction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The propagated backward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyBackwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">PyEvaluation</span></span><a class="headerlink" href="#routingblocks.PyEvaluation" title="Link to this definition"></a></dt>
+<dd><p>The PyEvaluation class implements the evaluation interface in pure Python. It’s meant to be used as a base class
+for custom python-based evaluation classes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.compute_cost">
+<span class="sig-name descname"><span class="pre">compute_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.compute_cost" title="Link to this definition"></a></dt>
+<dd><p>Computes the cost of a given label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>AnyForwardLabel</em>) – The label</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">segments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">AnyForwardLabel</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">AnyBackwardLabel</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the cost of the route given by concatenating the passed route sub-sequences. Each sub-sequences is
+guaranteed to have valid forward and backward labels.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">EVALN</span></code> in <span id="id9">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance</p></li>
+<li><p><strong>segments</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>Tuple</em><em>[</em><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a><em>, </em><em>AnyForwardLabel</em><em>, </em><em>AnyBackwardLabel</em><em>]</em><em>]</em><em>]</em>) – A list of route sub-sequences, each given as a list of tuples of (vertex, forward label, backward label)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the route</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.create_backward_label">
+<span class="sig-name descname"><span class="pre">create_backward_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.create_backward_label" title="Link to this definition"></a></dt>
+<dd><p>Creates and initializes a backward label for the given vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">INIT</span></code> in <span id="id10">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex representing singleton route [vertex]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The initialized backward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyBackwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.create_forward_label">
+<span class="sig-name descname"><span class="pre">create_forward_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.create_forward_label" title="Link to this definition"></a></dt>
+<dd><p>Creates and initializes a forward label for the given vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">INIT</span></code> in <span id="id11">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex representing singleton route [vertex]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The initialized backward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyBackwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.get_cost_components">
+<span class="sig-name descname"><span class="pre">get_cost_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.get_cost_components" title="Link to this definition"></a></dt>
+<dd><p>Returns the cost components of a given label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>AnyForwardLabel</em>) – The label</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost components of the label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.is_feasible">
+<span class="sig-name descname"><span class="pre">is_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.is_feasible" title="Link to this definition"></a></dt>
+<dd><p>Checks whether a given label is feasible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>AnyForwardLabel</em>) – The label</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the label is feasible, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.propagate_forward">
+<span class="sig-name descname"><span class="pre">propagate_forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyForwardLabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.propagate_forward" title="Link to this definition"></a></dt>
+<dd><p>Extends the partial route represented by the forward label of pred_vertex to the vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">FORW([...,</span> <span class="pre">pred_vertex]⊕[vertex])</span></code> in <span id="id12">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred_label</strong> (<em>AnyForwardLabel</em>) – The forward label of the predecessor vertex</p></li>
+<li><p><strong>pred_vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The predecessor vertex</p></li>
+<li><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex</p></li>
+<li><p><strong>arc</strong> (<a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a>) – The arc connecting pred_vertex and vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The propagated forward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyForwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.PyEvaluation.propagate_backward">
+<span class="sig-name descname"><span class="pre">propagate_backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">succ_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnyBackwardLabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">succ_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.PyEvaluation.propagate_backward" title="Link to this definition"></a></dt>
+<dd><p>Extends the partial route represented by the backward label of succ_vertex to the vertex.</p>
+<p>Corresponds to <code class="docutils literal notranslate"><span class="pre">BACK([vertex]⊕[succ_vertex,</span> <span class="pre">...])</span></code> in <span id="id13">Vidal <em>et al.</em> [<a class="reference internal" href="references.html#id3" title="Thibaut Vidal, Teodor Gabriel Crainic, Michel Gendreau, and Christian Prins. A unified solution framework for multi-attribute vehicle routing problems. European Journal of Operational Research, 234(3):658–673, May 2014.">VCGP14</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>succ_label</strong> (<em>AnyBackwardLabel</em>) – The backward label of the successor vertex</p></li>
+<li><p><strong>succ_vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The successor vertex</p></li>
+<li><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex</p></li>
+<li><p><strong>arc</strong> (<a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><em>Arc</em></a>) – The arc connecting succ_vertex to vertex. Note that this corresponds to the reverse arc of the forward direction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The propagated backward label</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AnyBackwardLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="evaluate_insertion">
+<span class="sig-name descname"><span class="pre">evaluate_insertion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><span class="pre">Route</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">after_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">VertexID</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#evaluate_insertion" title="Link to this definition"></a></dt>
+<dd><p>Evaluates inserting a vertex into a route after the specified position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><em>Evaluation</em></a>) – The evaluation function</p></li>
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance</p></li>
+<li><p><strong>route</strong> (<a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><em>Route</em></a>) – The route</p></li>
+<li><p><strong>after_position</strong> (<em>int</em>) – The position after which the vertex is inserted</p></li>
+<li><p><strong>vertex_id</strong> (<em>VertexID</em>) – The id of the vertex to insert</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the route with the vertex inserted</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">evaluate_insertion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><span class="pre">Route</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">after_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Evaluates inserting a vertex into a route after the specified position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><em>Evaluation</em></a>) – The evaluation function</p></li>
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance</p></li>
+<li><p><strong>route</strong> (<a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><em>Route</em></a>) – The route</p></li>
+<li><p><strong>after_position</strong> (<em>int</em>) – The position after which the vertex is inserted</p></li>
+<li><p><strong>vertex</strong> (<a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>Vertex</em></a>) – The vertex to insert</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the route with the vertex inserted</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">evaluate_insertion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><span class="pre">Route</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">after_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Node" title="routingblocks.Node"><span class="pre">Node</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd><p>Evaluates inserting a node into a route after the specified position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><em>Evaluation</em></a>) – The evaluation function</p></li>
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance</p></li>
+<li><p><strong>route</strong> (<a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><em>Route</em></a>) – The route</p></li>
+<li><p><strong>after_position</strong> (<em>int</em>) – The position after which the vertex is inserted</p></li>
+<li><p><strong>node</strong> (<a class="reference internal" href="solution.html#routingblocks.Node" title="routingblocks.Node"><em>Node</em></a>) – The node to insert</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the route with the vertex inserted</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.evaluate_splice">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">evaluate_splice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><span class="pre">Route</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_segment_end_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backward_segment_begin_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.evaluate_splice" title="Link to this definition"></a></dt>
+<dd><p>Evaluates splicing two sub-sequences of a route together. The first sub-seuence ends (non-inclusive) at
+<code class="docutils literal notranslate"><span class="pre">forward_segment_end_pos</span></code> and the second sub-sequence starts (including) at <code class="docutils literal notranslate"><span class="pre">backward_segment_begin_pos</span></code>.</p>
+<p>Example:
+Let <code class="docutils literal notranslate"><span class="pre">route</span> <span class="pre">=</span> <span class="pre">[D,</span> <span class="pre">C1,</span> <span class="pre">C2,</span> <span class="pre">C3,</span> <span class="pre">C4,</span> <span class="pre">C5,</span> <span class="pre">C6,</span> <span class="pre">D]</span></code> and <code class="docutils literal notranslate"><span class="pre">forward_segment_end_pos</span> <span class="pre">=</span> <span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">backward_segment_begin_pos</span> <span class="pre">=</span> <span class="pre">5</span></code>.
+Then the sub-sequences are <code class="docutils literal notranslate"><span class="pre">[D,</span> <span class="pre">C1]</span></code> and <code class="docutils literal notranslate"><span class="pre">[C5,</span> <span class="pre">C6,</span> <span class="pre">D]</span></code>. The splice operation thus evaluates the cost of the route
+<code class="docutils literal notranslate"><span class="pre">[D,</span> <span class="pre">C1,</span> <span class="pre">C5,</span> <span class="pre">C6,</span> <span class="pre">D]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<a class="reference internal" href="adptw.html#routingblocks.adptw.Evaluation" title="routingblocks.adptw.Evaluation"><em>Evaluation</em></a>) – The evaluation function</p></li>
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance</p></li>
+<li><p><strong>route</strong> (<a class="reference internal" href="solution.html#routingblocks.Route" title="routingblocks.Route"><em>Route</em></a>) – The route</p></li>
+<li><p><strong>forward_segment_end_pos</strong> (<em>int</em>) – The end position of the first sub-sequence (non-inclusive)</p></li>
+<li><p><strong>backward_segment_begin_pos</strong> (<em>int</em>) – The start position of the second sub-sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cost of the spliced route</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="solution.html" class="btn btn-neutral float-left" title="Solution representation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="localsearch.html" class="btn btn-neutral float-right" title="Local search" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 - 2023, Patrick Sean Klein.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

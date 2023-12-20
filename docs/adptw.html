@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADPTW &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f9d500d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NIFTW" href="niftw.html" />
+    <link rel="prev" title="Auxiliary algorithms and data structures" href="auxilliary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RoutingBlocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_operators.html">Custom operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_problem_settings.html">Custom problem settings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instance.html">Problem instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ADPTW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-routingblocks.adptw">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.adptw.Evaluation"><code class="docutils literal notranslate"><span class="pre">Evaluation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.adptw.Evaluation.overload_penalty_factor"><code class="docutils literal notranslate"><span class="pre">Evaluation.overload_penalty_factor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.adptw.Evaluation.resource_penalty_factor"><code class="docutils literal notranslate"><span class="pre">Evaluation.resource_penalty_factor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.adptw.Evaluation.time_shift_penalty_factor"><code class="docutils literal notranslate"><span class="pre">Evaluation.time_shift_penalty_factor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.adptw.ArcData"><code class="docutils literal notranslate"><span class="pre">ArcData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.adptw.VertexData"><code class="docutils literal notranslate"><span class="pre">VertexData</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.adptw.create_adptw_arc"><code class="docutils literal notranslate"><span class="pre">create_adptw_arc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.adptw.create_adptw_vertex"><code class="docutils literal notranslate"><span class="pre">create_adptw_vertex()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.adptw.FacilityPlacementOptimizer"><code class="docutils literal notranslate"><span class="pre">FacilityPlacementOptimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.adptw.FacilityPlacementOptimizer.optimize"><code class="docutils literal notranslate"><span class="pre">FacilityPlacementOptimizer.optimize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="niftw.html">NIFTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribution opportunities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks class index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RoutingBlocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ADPTW</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/adptw.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adptw">
+<span id="id1"></span><h1>ADPTW<a class="headerlink" href="#adptw" title="Link to this heading"></a></h1>
+<p>This module provides efficient implementations to solve ADPTW problems.</p>
+<section id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Link to this heading"></a></h2>
+<p>The A-D-P-TW class of vehicle routing routing problems with intermediate stops encompassed problems with the following attributes (cf. <span id="id2">Schiffer <em>et al.</em> [<a class="reference internal" href="references.html#id7" title="Maximilian Schiffer, Michael Schneider, Grit Walther, and Gilbert Laporte. Vehicle routing and location routing with intermediate stops: a review. Transportation Science, 53(2):319–343, mar 2019.">SSWL19</a>]</span>):</p>
+<ul class="simple">
+<li><p><strong>Arc-based (A):</strong> The consumption of operational resources, e.g. fuel, is continuous and occurs when travelling between nodes.</p></li>
+<li><p><strong>Dependent (D):</strong> The replenishment time is dependent on the quantity of the operational resource being replenished, meaning more time is needed for larger quantities.</p></li>
+<li><p><strong>Partial Replenishment (P):</strong> The operational resources can be partially restocked, implying that the replenishment process can be interrupted at any time, i.e., does not need to fully replenish the resource in question.</p></li>
+<li><p><strong>Time Windows (TW):</strong> The scheduled stops need to be visited within node-specific periods.</p></li>
+</ul>
+<p>In this setting, the routing strategy must consider continuous resource consumption, variable replenishment times, the option for partial replenishment, and adherence to designated time windows.
+This combination of factors is one of the most challenging routing problems, and is often encountered in real-world applications, e.g., the Electric Vehicle Routing Problem with Time Windows and Partial Replenishment (EVRP-TW-PR).</p>
+</section>
+<section id="module-routingblocks.adptw">
+<span id="api"></span><h2>API<a class="headerlink" href="#module-routingblocks.adptw" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.adptw.Evaluation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.adptw.</span></span><span class="sig-name descname"><span class="pre">Evaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_resource_capacity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle_storage_capacity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.adptw.Evaluation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyEvaluation</span></code></p>
+<p>Evaluation for ADPTW problems. Works only with arcs and vertices created using <span class="xref std std-ref">create_adptw_arc</span> and <span class="xref std std-ref">create_adptw_vertex</span>.
+Uses a set of penalty factors to penalize infeasible solutions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>overload_penalty_factor</strong> – The penalty factor for overloading the vehicle.</p></li>
+<li><p><strong>resource_penalty_factor</strong> – The penalty factor for consuming more resources than carried the vehicle.</p></li>
+<li><p><strong>time_shift_penalty_factor</strong> – The penalty factor for time shifts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>vehicle_resource_capacity</strong> (<em>float</em>) – The vehicle’s battery capacity expressed in units of time, that is, the time it takes to fully replenish the resource of an empty vehicle.</p></li>
+<li><p><strong>vehicle_storage_capacity</strong> (<em>float</em>) – The vehicle’s storage capacity. Determines how much demand can be served in a single route.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.adptw.Evaluation.overload_penalty_factor">
+<span class="sig-name descname"><span class="pre">overload_penalty_factor</span></span><a class="headerlink" href="#routingblocks.adptw.Evaluation.overload_penalty_factor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.adptw.Evaluation.resource_penalty_factor">
+<span class="sig-name descname"><span class="pre">resource_penalty_factor</span></span><a class="headerlink" href="#routingblocks.adptw.Evaluation.resource_penalty_factor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.adptw.Evaluation.time_shift_penalty_factor">
+<span class="sig-name descname"><span class="pre">time_shift_penalty_factor</span></span><a class="headerlink" href="#routingblocks.adptw.Evaluation.time_shift_penalty_factor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.adptw.ArcData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.adptw.</span></span><span class="sig-name descname"><span class="pre">ArcData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">travel_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumption</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.adptw.ArcData" title="Link to this definition"></a></dt>
+<dd><p>Data stored on arcs in an ADPTW problem setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance</strong> (<em>float</em>) – The distance between the two vertices connected by the arc.</p></li>
+<li><p><strong>travel_time</strong> (<em>float</em>) – The time it takes to travel between the two vertices connected by the arc.</p></li>
+<li><p><strong>consumption</strong> (<em>float</em>) – The time required to replenish the resource consumed when traveling between the two vertices connected by the arc.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.adptw.VertexData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.adptw.</span></span><span class="sig-name descname"><span class="pre">VertexData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">demand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">earliest_time_of_arrival</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latest_time_of_arrival</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.adptw.VertexData" title="Link to this definition"></a></dt>
+<dd><p>Data stored on vertices in an ADPTW problem setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – The x coordinate of the vertex.</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – The y coordinate of the vertex.</p></li>
+<li><p><strong>demand</strong> (<em>float</em>) – The demand of the vertex. 0 for station and depot vertices.</p></li>
+<li><p><strong>earliest_time_of_arrival</strong> (<em>float</em>) – The earliest time at which service at the vertex can begin.</p></li>
+<li><p><strong>latest_time_of_arrival</strong> (<em>float</em>) – The latest time at which service at the vertex can begin.</p></li>
+<li><p><strong>service_time</strong> (<em>float</em>) – The time needed to serve the vertex.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.adptw.create_adptw_arc">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.adptw.</span></span><span class="sig-name descname"><span class="pre">create_adptw_arc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ADPTWArcData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.adptw.create_adptw_arc" title="Link to this definition"></a></dt>
+<dd><p>Creates an arc for an ADPTW problem setting. Stores :param data directly as a native C++ object.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The data member of the created arc is not accessible from python. Doing so will likely result in a crash.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>ADPTWArcData</em>) – The data to associate with this vertex</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc">Arc</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.adptw.create_adptw_vertex">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.adptw.</span></span><span class="sig-name descname"><span class="pre">create_adptw_vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_facility</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_depot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ADPTWVertexData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.adptw.create_adptw_vertex" title="Link to this definition"></a></dt>
+<dd><p>Creates a vertex for an ADPTW problem setting. Stores :param data directly as a native C++ object.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The data member of the created vertex is not accessible from python. Doing so will likely result in a crash.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertex_id</strong> (<em>int</em>) – The unique identifier of the vertex.</p></li>
+<li><p><strong>str_id</strong> (<em>str</em>) – A human-readable string identifier for the vertex.</p></li>
+<li><p><strong>is_facility</strong> (<em>bool</em>) – Whether the vertex is a replenishment facility.</p></li>
+<li><p><strong>is_depot</strong> (<em>bool</em>) – Whether the vertex is a depot.</p></li>
+<li><p><strong>data</strong> (<em>ADPTWVertexData</em>) – The data to associate with this vertex.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex">Vertex</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.adptw.FacilityPlacementOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.adptw.</span></span><span class="sig-name descname"><span class="pre">FacilityPlacementOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_capacity_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.adptw.FacilityPlacementOptimizer" title="Link to this definition"></a></dt>
+<dd><p>ADPTW-specific detour insertion algorithm. Inserts visits to replenishment facilities at optimal locations into a route.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance.</p></li>
+<li><p><strong>resource_capacity_time</strong> (<em>float</em>) – The vehicle’s resource capacity expressed in units of time, that is, the time it takes to fully replenish the resource of an empty vehicle.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.adptw.FacilityPlacementOptimizer.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_vertex_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">VertexID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.adptw.FacilityPlacementOptimizer.optimize" title="Link to this definition"></a></dt>
+<dd><p>Optimizes the route by inserting visits to replenishment facilities at optimal locations.
+:param route_vertex_ids: The vertex ids of the route to optimize.
+:return: The optimized route as a list of vertex ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>route_vertex_ids</strong> (<em>List</em><em>[</em><em>VertexID</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[VertexID]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="auxilliary.html" class="btn btn-neutral float-left" title="Auxiliary algorithms and data structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="niftw.html" class="btn btn-neutral float-right" title="NIFTW" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 - 2023, Patrick Sean Klein.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

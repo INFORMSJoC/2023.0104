@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f9d500d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Custom operators" href="custom_operators.html" />
+    <link rel="prev" title="Welcome to RoutingBlock’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RoutingBlocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-library">Installing the library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-a-simple-ils">Implementing a simple ILS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extending-the-algorithm-to-an-alns">Extending the algorithm to an ALNS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_operators.html">Custom operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_problem_settings.html">Custom problem settings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instance.html">Problem instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adptw.html">ADPTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="niftw.html">NIFTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribution opportunities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks class index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RoutingBlocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<section id="installing-the-library">
+<h2>Installing the library<a class="headerlink" href="#installing-the-library" title="Link to this heading"></a></h2>
+<p>The package is available on PyPI and can be installed using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>routingblocks
+</pre></div>
+</div>
+<p>To obtain the bleeding-edge development version, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/tumBAIS/RoutingBlocks
+</pre></div>
+</div>
+<p>instead.</p>
+</section>
+<section id="implementing-a-simple-ils">
+<h2>Implementing a simple ILS<a class="headerlink" href="#implementing-a-simple-ils" title="Link to this heading"></a></h2>
+<p>Let’s start by implementing a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Iterated_local_search">ILS</a> algorithm to solve the <a class="reference external" href="https://https://research.sabanciuniv.edu/id/eprint/26033/1/WP_EVRPTW-Partial_Recharge_KeskinCatay.pdf">EVRP-TW-PR</a>.</p>
+<p>First, import the library and read the instance</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">routingblocks</span> <span class="k">as</span> <span class="nn">rb</span>
+
+<span class="k">def</span> <span class="nf">parse_instance</span><span class="p">(</span><span class="n">instance_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+    <span class="n">str_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;StringID&#39;</span><span class="p">,</span> <span class="s1">&#39;Type&#39;</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">instance_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">instance_stream</span><span class="p">:</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">instance_stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="c1"># Parse the vertices</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">instance_stream</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="c1"># Read columns into a dictionary</span>
+            <span class="n">vertex</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">str_fields</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)}</span>
+            <span class="n">vertices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+        <span class="c1"># Parse the parameters</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">instance_stream</span><span class="p">:</span>
+            <span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="c1"># Remove surrounding / characters and parse the value</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Create a mapping from pairs of vertices to arcs</span>
+    <span class="n">arcs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">:</span>
+            <span class="c1"># Compute distance</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="c1"># Compute travel time (distance / average velocity)</span>
+            <span class="n">travel_time</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>
+            <span class="c1"># Compute consumption (consumption rate * travel time / recharging rate)</span>
+            <span class="n">consumption</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">travel_time</span> <span class="o">/</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span>
+            <span class="n">arcs</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;StringID&#39;</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;StringID&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span> <span class="n">travel_time</span><span class="o">=</span><span class="n">travel_time</span><span class="p">,</span>
+                                                      <span class="n">consumption</span><span class="o">=</span><span class="n">consumption</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">arcs</span><span class="p">,</span> <span class="n">parameters</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The instance format is described in the <a class="reference external" href="https://data.mendeley.com/datasets/h3mrm5dhxw/1">supplemental material</a> to <span id="id2">Schneider <em>et al.</em> [<a class="reference internal" href="references.html#id4" title="Michael Schneider, Andreas Stenger, and Dominik Goeke. The electric vehicle-routing problem with time windows and recharging stations. Transportation Science, 48(4):500–520, nov 2014.">SSG14</a>]</span>.</p>
+</div>
+<p>Next, we create a RoutingBlocks Instance object from the parsed data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_instance</span><span class="p">(</span><span class="n">serialized_vertices</span><span class="p">,</span> <span class="n">serialized_arcs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">rb</span><span class="o">.</span><span class="n">Instance</span><span class="p">:</span>
+    <span class="n">instance_builder</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">InstanceBuilder</span><span class="p">(</span><span class="n">create_vertex</span><span class="o">=</span><span class="n">rb</span><span class="o">.</span><span class="n">adptw</span><span class="o">.</span><span class="n">create_adptw_vertex</span><span class="p">,</span>
+                                                  <span class="n">create_arc</span><span class="o">=</span><span class="n">rb</span><span class="o">.</span><span class="n">adptw</span><span class="o">.</span><span class="n">create_adptw_arc</span><span class="p">)</span>
+    <span class="c1"># Create and register the vertices</span>
+    <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">serialized_vertices</span><span class="p">:</span>
+        <span class="c1"># Create problem-specific data held by vertices</span>
+        <span class="n">vertex_data</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">adptw</span><span class="o">.</span><span class="n">VertexData</span><span class="p">(</span><span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;demand&#39;</span><span class="p">],</span> <span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;ReadyTime&#39;</span><span class="p">],</span>
+                                               <span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;DueDate&#39;</span><span class="p">],</span>
+                                               <span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;ServiceTime&#39;</span><span class="p">])</span>
+        <span class="c1"># Register the vertex dependinx for x in self._move_selector(related_vertices)g on it&#39;s type</span>
+        <span class="k">if</span> <span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
+            <span class="n">instance_builder</span><span class="o">.</span><span class="n">set_depot</span><span class="p">(</span><span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;StringID&#39;</span><span class="p">],</span> <span class="n">vertex_data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+            <span class="n">instance_builder</span><span class="o">.</span><span class="n">add_customer</span><span class="p">(</span><span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;StringID&#39;</span><span class="p">],</span> <span class="n">vertex_data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">instance_builder</span><span class="o">.</span><span class="n">add_station</span><span class="p">(</span><span class="n">vertex</span><span class="p">[</span><span class="s1">&#39;StringID&#39;</span><span class="p">],</span> <span class="n">vertex_data</span><span class="p">)</span>
+
+    <span class="c1"># Create and register the arcs</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">arc</span> <span class="ow">in</span> <span class="n">serialized_arcs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Create problem-specific data held by arcs</span>
+        <span class="n">arc_data</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">adptw</span><span class="o">.</span><span class="n">ArcData</span><span class="p">(</span><span class="n">arc</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">],</span> <span class="n">arc</span><span class="p">[</span><span class="s1">&#39;consumption&#39;</span><span class="p">],</span> <span class="n">arc</span><span class="p">[</span><span class="s1">&#39;travel_time&#39;</span><span class="p">])</span>
+        <span class="n">instance_builder</span><span class="o">.</span><span class="n">add_arc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">arc_data</span><span class="p">)</span>
+
+    <span class="c1"># Create instance</span>
+    <span class="k">return</span> <span class="n">instance_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RoutingBlocks does not store parameters in the Instance object.</p>
+</div>
+<p>We utilize the InstanceBuilder class, offering a convenient way to construct a RoutingBlocks Instance from a set of vertices and arcs. It requires two functions as arguments: a vertex and an arc factory. These functions create a vertex or an arc object based on the data provided by the user. The InstanceBuilder class then handles the registration of vertices and arcs within the Instance object.</p>
+<p>Once the instance is created, we can proceed to implement the ILS algorithm. We initiate by creating an Evaluation object, which is responsible for cost calculation and efficient move evaluation. RoutingBlocks already includes an Evaluation class for the EVRP-TW-PR, allowing us to easily use it:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to implement a custom Evaluation class for custom problem settings (See <a class="reference internal" href="custom_problem_settings.html#custom-problem-settings"><span class="std std-ref">Custom problem settings</span></a>).</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vehicle_storage_capacity</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span>
+<span class="c1"># Vehicle battery capacity in units of time:</span>
+<span class="c1"># battery capacity * inverse refueling rate = battery capacity / refueling rate</span>
+<span class="n">vehicle_battery_capacity_time</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span>
+<span class="c1"># Create an evaluation object</span>
+<span class="n">evaluation</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">adptw</span><span class="o">.</span><span class="n">Evaluation</span><span class="p">(</span><span class="n">vehicle_battery_capacity_time</span><span class="p">,</span> <span class="n">vehicle_storage_capacity</span><span class="p">)</span>
+<span class="c1"># Set the penalty factors used to penalize violations of the time window, the</span>
+<span class="c1"># vehicle capacity, and the charge constraints</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">overload_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">resource_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">time_shift_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The module’s name <code class="docutils literal notranslate"><span class="pre">adptw</span></code> refers to the classification introduced in <span id="id3">Schiffer <em>et al.</em> [<a class="reference internal" href="references.html#id2" title="M Schiffer, P Klein, M Schneider, and G Walther. A solution framework for a class of vehicle routing problems with intermediate stops. Working Paper OM-DPO 01/2017, 2017.">SKSW17</a>]</span>.</p>
+</div>
+<p>Being done with the setup, we can start implementing the main ILS algorithm.
+We start by creating a random solution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_random_solution</span><span class="p">(</span><span class="n">evaluation</span><span class="p">:</span> <span class="n">rb</span><span class="o">.</span><span class="n">Evaluation</span><span class="p">,</span> <span class="n">instance</span><span class="p">:</span> <span class="n">rb</span><span class="o">.</span><span class="n">Instance</span><span class="p">):</span>
+    <span class="n">customer_vertex_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">vertex_id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">customers</span><span class="p">]</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">customer_vertex_ids</span><span class="p">)</span>
+
+    <span class="c1"># Draw a sequence of positions where to split</span>
+    <span class="n">number_of_splits</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">customer_vertex_ids</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">split_positions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="nb">sorted</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">customer_vertex_ids</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">number_of_splits</span><span class="p">)),</span>
+                       <span class="nb">len</span><span class="p">(</span><span class="n">customer_vertex_ids</span><span class="p">)]</span>
+    <span class="c1"># Create routes according to the split positions. Each route is a list of customer vertex ids.</span>
+    <span class="n">routes</span> <span class="o">=</span> <span class="p">[[</span><span class="n">customer_vertex_ids</span><span class="p">[</span><span class="n">route_start_index</span><span class="p">:</span><span class="n">route_end_index</span><span class="p">]]</span> <span class="k">for</span> <span class="n">route_start_index</span><span class="p">,</span> <span class="n">route_end_index</span> <span class="ow">in</span>
+              <span class="nb">zip</span><span class="p">(</span><span class="n">split_positions</span><span class="p">,</span> <span class="n">split_positions</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
+    <span class="c1"># Create RoutingBlocks Route objects</span>
+    <span class="n">routes</span> <span class="o">=</span> <span class="p">[</span><span class="n">rb</span><span class="o">.</span><span class="n">create_route</span><span class="p">(</span><span class="n">evaluation</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">route</span><span class="p">)</span> <span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">]</span>
+    <span class="c1"># Create RoutingBlocks Solution object</span>
+    <span class="k">return</span> <span class="n">rb</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="n">evaluation</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we begin by copying all customers into a single list, which is then shuffled and randomly split at various positions to generate a set of routes. We convert these into RoutingBlocks Route objects using the create_route helper function. This function takes the evaluation function, the instance, and a sequence of vertex IDs as arguments and creates a Route object, adding start and end depots as needed. Finally, we create and return a solution using the list of routes.</p>
+<p>Subsequently, we create and configure the local search solver:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a best-improvement pivoting rule</span>
+<span class="n">pivoting_rule</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">BestImprovementPivotingRule</span><span class="p">()</span>
+<span class="c1"># Configure the local search - use the best-improvement pivoting rule</span>
+<span class="n">local_search</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">LocalSearch</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pivoting_rule</span><span class="p">)</span>
+<span class="c1"># Create a set of allowed arcs</span>
+<span class="n">arc_set</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">ArcSet</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">)</span>
+
+<span class="c1"># Create a set of operators that will be used later when calling the local search</span>
+<span class="n">operators</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">SwapOperator_0_1</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">arc_set</span><span class="p">),</span>
+    <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">SwapOperator_1_1</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">arc_set</span><span class="p">),</span>
+    <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">InsertStationOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">),</span>
+    <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">RemoveStationOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The local search solver accepts four arguments: the instance, the evaluation used, a second evaluation object that verifies moves deemed profitable by the first evaluation class, and a pivoting rule.
+Passing a second evaluation object for verification is beneficial for problems like EVRP-TW-PR, where exact evaluation is costly.
+By default, the ADPTW Evaluation class implements approximate move evaluation. We can either pass an exact evaluation class here,
+or we can pass None, which prompts the local search to validate moves by applying them to a solution copy and evaluating the cost based on forward labels.</p>
+<p>The pivoting rule implements the pivoting strategy used by the local search. RoutingBlocks provides three pivoting rules:
+<span class="xref std std-ref">best improvement</span>, <span class="xref std std-ref">k-best improvement</span>, and <span class="xref std std-ref">first improvement</span>.
+It is also possible to implement custom pivoting rules (See <a class="reference internal" href="localsearch.html#custom-pivoting-rules"><span class="std std-ref">custom pivoting rules</span></a>).
+The former is the default and is the one we use here. The latter stops the local search as soon as a profitable move is found.</p>
+<p>Additionally, we create a set of operators to be used later when invoking the local search. The implementations provided by RoutingBlocks require a set of allowed arcs as an argument. The operator will only consider arcs within this set. By default, all arcs are allowed.
+Executing the local search procedure is as simple as calling</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">local_search</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Be aware that this process will modify the solution object in-place.</p>
+<p>The last procedure to implement is the perturbation function. This function disturbs the local minimum identified by the local search in order to escape local optima. We implement a straightforward perturbation function that swaps a random number of segments between randomly chosen routes within the solution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">perturb</span><span class="p">(</span><span class="n">solution</span><span class="p">:</span> <span class="n">rb</span><span class="o">.</span><span class="n">Solution</span><span class="p">,</span> <span class="n">max_exchanges</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">rb</span><span class="o">.</span><span class="n">Solution</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">solution</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">empty</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Cannot perturb a solution with only one route.&quot;</span>
+    <span class="c1"># Create a new solution by copying the current solution</span>
+    <span class="n">new_solution</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+
+    <span class="c1"># Exchange random sequences between routes</span>
+    <span class="n">num_exchanges</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_exchanges</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_exchanges</span><span class="p">):</span>
+        <span class="c1"># Select two random routes</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">route_1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">new_solution</span><span class="p">)</span>
+            <span class="n">route_2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">new_solution</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">route_1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">route_2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">route_1</span><span class="o">.</span><span class="n">empty</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">route_2</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="c1"># Select a random sequence of customers in route 1 that does not include the depot</span>
+        <span class="n">start_index_1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">route_1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># end_index is exclusive</span>
+        <span class="n">end_index_1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">start_index_1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">route_1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Do the same for the second route</span>
+        <span class="c1"># Select a random sequence of customers in route 1 that does not include the depot</span>
+        <span class="n">start_index_2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">route_2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># end_index is exclusive</span>
+        <span class="n">end_index_2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">start_index_2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">route_2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Exchange the sequences</span>
+        <span class="n">new_solution</span><span class="o">.</span><span class="n">exchange_segment</span><span class="p">(</span><span class="n">route_1</span><span class="p">,</span> <span class="n">start_index_1</span><span class="p">,</span> <span class="n">end_index_1</span><span class="p">,</span>
+                                      <span class="n">route_2</span><span class="p">,</span> <span class="n">start_index_2</span><span class="p">,</span> <span class="n">end_index_2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_solutio</span>
+</pre></div>
+</div>
+<p>We can now implement the main loop of the ILS algorithm:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_solution</span> <span class="o">=</span> <span class="n">create_random_solution</span><span class="p">(</span><span class="n">evaluation</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+<span class="n">current_solution</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">best_solution</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">):</span>
+    <span class="c1"># Search the neighborhood of the current solution. This modifies the solution in-place.</span>
+    <span class="n">local_search</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">current_solution</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">current_solution</span><span class="o">.</span><span class="n">cost</span> <span class="o">&lt;</span> <span class="n">best_solution</span><span class="o">.</span><span class="n">cost</span><span class="p">:</span>
+        <span class="n">best_solution</span> <span class="o">=</span> <span class="n">current_solution</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New best solution found: </span><span class="si">{</span><span class="n">best_solution</span><span class="o">.</span><span class="n">cost</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Perturb the current solution</span>
+    <span class="n">current_solution</span> <span class="o">=</span> <span class="n">perturb</span><span class="p">(</span><span class="n">current_solution</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_solution</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Putting everything together, we arrive at the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">instance_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+    <span class="n">vertices</span><span class="p">,</span> <span class="n">arcs</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">parse_instance</span><span class="p">(</span><span class="n">instance_path</span><span class="p">)</span>
+    <span class="n">instance</span> <span class="o">=</span> <span class="n">create_instance</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">arcs</span><span class="p">)</span>
+    <span class="n">vehicle_storage_capacity</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span>
+    <span class="c1"># Vehicle battery capacity in units of time:</span>
+    <span class="c1"># battery capacity * inverse refueling rate = battery capacity / refueling rate</span>
+    <span class="n">vehicle_battery_capacity_time</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span>
+
+    <span class="n">evaluation</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">adptw</span><span class="o">.</span><span class="n">Evaluation</span><span class="p">(</span><span class="n">vehicle_battery_capacity_time</span><span class="p">,</span> <span class="n">vehicle_storage_capacity</span><span class="p">)</span>
+    <span class="c1"># Set the penalty factors used to penalize violations of the time window, the</span>
+    <span class="c1"># vehicle capacity, and the charge constraints</span>
+    <span class="n">evaluation</span><span class="o">.</span><span class="n">overload_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+    <span class="n">evaluation</span><span class="o">.</span><span class="n">resource_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+    <span class="n">evaluation</span><span class="o">.</span><span class="n">time_shift_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+
+    <span class="n">pivoting_rule</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">BestImprovementPivotingRule</span><span class="p">()</span>
+    <span class="n">local_search</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">LocalSearch</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pivoting_rule</span><span class="p">)</span>
+    <span class="c1"># Create a set of allowed arcs</span>
+    <span class="n">arc_set</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">ArcSet</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">)</span>
+
+    <span class="c1"># Create a set of operators that will be used later when calling the local search</span>
+    <span class="n">operators</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">SwapOperator_0_1</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">arc_set</span><span class="p">),</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">SwapOperator_1_1</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">arc_set</span><span class="p">),</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">InsertStationOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">),</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">RemoveStationOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">best_solution</span> <span class="o">=</span> <span class="n">create_random_solution</span><span class="p">(</span><span class="n">evaluation</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+    <span class="n">current_solution</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">best_solution</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="c1"># Search the neighborhood of the current solution. This modifies the solution in-place.</span>
+        <span class="n">local_search</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">current_solution</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current_solution</span><span class="o">.</span><span class="n">cost</span> <span class="o">&lt;</span> <span class="n">best_solution</span><span class="o">.</span><span class="n">cost</span><span class="p">:</span>
+            <span class="n">best_solution</span> <span class="o">=</span> <span class="n">current_solution</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New best solution found: </span><span class="si">{</span><span class="n">best_solution</span><span class="o">.</span><span class="n">cost</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">best_solution</span><span class="o">.</span><span class="n">feasible</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Perturb the current solution</span>
+        <span class="n">current_solution</span> <span class="o">=</span> <span class="n">perturb</span><span class="p">(</span><span class="n">current_solution</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_solution</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best solution:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The full source code can be found in the main <a class="reference external" href="https://github.com/tumBAIS/RoutingBlocks/tree/develop/examples/ils">github repository</a> .</p>
+</section>
+<section id="extending-the-algorithm-to-an-alns">
+<h2>Extending the algorithm to an ALNS<a class="headerlink" href="#extending-the-algorithm-to-an-alns" title="Link to this heading"></a></h2>
+<p id="alns-extension">A simple ILS algorithm often falls short in competitive problem settings such as the EVRP-TW-PR. In these cases, state-of-the-art algorithms rely on ALNS. ALNS employs a set of destroy and repair operators to perturb the current solution. Destroy operators remove a portion of the solution, while repair operators attempt to fix the solution by reinserting the removed customers. Operator selection is done probabilistically, with the probability of selecting an operator being proportional to its performance, which is estimated based on the number of times an operator has improved the solution.</p>
+<p>RoutingBlocks offers an ALNS solver and several destroy and repair operators out of the box, making the implementation of ALNS fairly straightforward:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">alns</span><span class="p">(</span><span class="n">instance</span><span class="p">:</span> <span class="n">rb</span><span class="o">.</span><span class="n">Instance</span><span class="p">,</span> <span class="n">vehicle_storage_capacity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">vehicle_battery_capacity_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+         <span class="n">number_of_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">min_vertex_removal_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+         <span class="n">max_vertex_removal_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">):</span>
+    <span class="n">evaluation</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">adptw</span><span class="o">.</span><span class="n">Evaluation</span><span class="p">(</span><span class="n">vehicle_battery_capacity_time</span><span class="p">,</span> <span class="n">vehicle_storage_capacity</span><span class="p">)</span>
+    <span class="c1"># Set the penalty factors used to penalize violations of the time window, the</span>
+    <span class="c1"># vehicle capacity, and the charge constraints</span>
+    <span class="n">evaluation</span><span class="o">.</span><span class="n">overload_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+    <span class="n">evaluation</span><span class="o">.</span><span class="n">resource_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+    <span class="n">evaluation</span><span class="o">.</span><span class="n">time_shift_penalty_factor</span> <span class="o">=</span> <span class="mf">100.</span>
+
+    <span class="n">pivoting_rule</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">BestImprovementPivotingRule</span><span class="p">()</span>
+    <span class="n">local_search</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">LocalSearch</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pivoting_rule</span><span class="p">)</span>
+    <span class="c1"># Create a set of allowed arcs</span>
+    <span class="n">arc_set</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">ArcSet</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">number_of_vertices</span><span class="p">)</span>
+
+    <span class="c1"># Create a set of operators that will be used later when calling the local search</span>
+    <span class="n">operators</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">SwapOperator_0_1</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">arc_set</span><span class="p">),</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">SwapOperator_1_1</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">arc_set</span><span class="p">),</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">InsertStationOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">),</span>
+        <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">RemoveStationOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="c1">#############################################################################################</span>
+    <span class="c1"># End of the code that is identical to the ILS algorithm</span>
+    <span class="c1">#############################################################################################</span>
+
+    <span class="c1"># Create a random engine and seed it with the current time</span>
+    <span class="n">randgen</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time_ns</span><span class="p">())</span>
+    <span class="c1"># Create an ALNS solver.</span>
+    <span class="c1"># Smoothing factor determines the weight of historic performance when selecting an operator.</span>
+    <span class="n">smoothing_factor</span> <span class="o">=</span> <span class="mf">0.4</span>
+    <span class="n">alns</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">AdaptiveLargeNeighborhood</span><span class="p">(</span><span class="n">randgen</span><span class="p">,</span> <span class="n">smoothing_factor</span><span class="p">)</span>
+
+    <span class="c1"># Register some operators with the ALNS solver</span>
+    <span class="n">alns</span><span class="o">.</span><span class="n">add_repair_operator</span><span class="p">(</span><span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">RandomInsertionOperator</span><span class="p">(</span><span class="n">randgen</span><span class="p">))</span>
+    <span class="n">alns</span><span class="o">.</span><span class="n">add_repair_operator</span><span class="p">(</span><span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">BestInsertionOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span>
+                                                                <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">blink_selector_factory</span><span class="p">(</span>
+                                                                    <span class="n">blink_probability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">randgen</span><span class="o">=</span><span class="n">randgen</span><span class="p">)))</span>
+    <span class="n">alns</span><span class="o">.</span><span class="n">add_destroy_operator</span><span class="p">(</span><span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">RandomRemovalOperator</span><span class="p">(</span><span class="n">randgen</span><span class="p">))</span>
+    <span class="n">alns</span><span class="o">.</span><span class="n">add_destroy_operator</span><span class="p">(</span><span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">WorstRemovalOperator</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span>
+                                                                <span class="n">rb</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">blink_selector_factory</span><span class="p">(</span>
+                                                                    <span class="n">blink_probability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">randgen</span><span class="o">=</span><span class="n">randgen</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>We begin with the boilerplate code established for the ILS and add just a few lines to create and configure the ALNS solver. This class is responsible for operator selection and weight adaptation. It takes a random engine and a smoothing factor as arguments. The smoothing factor determines the weight of historical performance when selecting an operator. Next, we create and register destroy and repair operators with the ALNS solver. RoutingBlocks provides a <a class="reference internal" href="alns.html#alns-operators"><span class="std std-ref">set of standard operators</span></a> out of the box. In this case, we use RandomInsertion, BestInsertion, RandomRemoval, and WorstRemoval. We configure BestInsertion and WorstRemoval to select insertion/removal spots using a blink selection criterion.</p>
+<p>We can now employ the ALNS solver to perturb the current solution within the main loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a random starting solution</span>
+<span class="n">best_solution</span> <span class="o">=</span> <span class="n">create_random_solution</span><span class="p">(</span><span class="n">evaluation</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">number_of_iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">current_solution</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">best_solution</span><span class="p">)</span>
+    <span class="c1"># Perturb the current solution</span>
+    <span class="n">number_of_vertices_to_remove</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">min_vertex_removal_factor</span><span class="p">,</span> <span class="n">max_vertex_removal_factor</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">route</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="n">current_solution</span><span class="p">))</span>
+    <span class="n">picked_operators</span> <span class="o">=</span> <span class="n">alns</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">evaluation</span><span class="p">,</span> <span class="n">current_solution</span><span class="p">,</span> <span class="n">number_of_vertices_to_remove</span><span class="p">)</span>
+
+    <span class="c1"># Search the neighborhood of the current solution. This modifies the solution in-place.</span>
+    <span class="n">local_search</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">current_solution</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">current_solution</span><span class="o">.</span><span class="n">cost</span> <span class="o">&lt;</span> <span class="n">best_solution</span><span class="o">.</span><span class="n">cost</span><span class="p">:</span>
+        <span class="n">best_solution</span> <span class="o">=</span> <span class="n">current_solution</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New best solution found: </span><span class="si">{</span><span class="n">best_solution</span><span class="o">.</span><span class="n">cost</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">best_solution</span><span class="o">.</span><span class="n">feasible</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="c1"># Update the ALNS solver with the performance of the operators used in the last iteration</span>
+        <span class="c1"># We assign a score of &#39;4&#39; to the operators that were used to improve the solution</span>
+        <span class="n">alns</span><span class="o">.</span><span class="n">collect_score</span><span class="p">(</span><span class="o">*</span><span class="n">picked_operators</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Update the ALNS solver with the performance of the operators used in the last iteration</span>
+        <span class="c1"># We assign a score of &#39;0&#39; to the operators that were not used to improve the solution</span>
+        <span class="n">alns</span><span class="o">.</span><span class="n">collect_score</span><span class="p">(</span><span class="o">*</span><span class="n">picked_operators</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Calculate new operator weights based on the last period</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">alns</span><span class="o">.</span><span class="n">adapt_operator_weights</span><span class="p">()</span>
+
+<span class="k">return</span> <span class="n">best_solution</span>
+</pre></div>
+</div>
+<p>We employ three essential methods of the ALNS solver:</p>
+<ol class="arabic simple">
+<li><p>alns.generate: This method selects and applies a destroy and a repair operator to the current solution, modifying it in-place. It returns a tuple of the chosen operators.</p></li>
+<li><p>alns.collect_score: This method gathers scores for the provided operators. It requires the selected operators and a score as arguments.</p></li>
+<li><p>alns.adapt_operator_weights: This method adjusts the weights of the operators based on the scores collected during the last period.</p></li>
+</ol>
+<p>For more details on the ALNS solver, see the <a class="reference internal" href="alns.html#alns"><span class="std std-ref">documentation</span></a>. The full code of the ALNS algorithm is available <a class="reference external" href="https://github.com/tumBAIS/RoutingBlocks/tree/main/examples/alns">here</a>. A more sophisticated ALNS-based algorithm can be found in the <a class="reference external" href="https://github.com/tumBAIS/RoutingBlocks/tree/main/examples/evrptw">main repository</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to RoutingBlock’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom_operators.html" class="btn btn-neutral float-right" title="Custom operators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 - 2023, Patrick Sean Klein.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
