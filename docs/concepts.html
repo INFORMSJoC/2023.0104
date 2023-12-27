@@ -1,31 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search &mdash; RoutingBlocks 01.04.2023 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-  
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concepts &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=7f9d500d"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
-        <script>mermaid.initialize({startOnLoad:true});</script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Problem instance" href="instance.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,7 +34,7 @@
             RoutingBlocks
           </a>
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -48,10 +42,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="custom_operators.html">Custom operators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="custom_problem_settings.html">Custom problem settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Concepts</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Components</span></p>
 <ul>
@@ -59,8 +52,8 @@
 <li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exact_facility_placement.html">Exact replenishment facility placement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metaheuristic_components.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact station placement (FRVCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alns.html">ALNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
@@ -70,11 +63,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="extension.html">Extending the library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="alternatives.html">Alternatives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribution opportunities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks class index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks Class Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
@@ -92,8 +84,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Search</li>
+      <li class="breadcrumb-item active">Concepts</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/concepts.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -101,22 +94,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
-  </noscript>
+  <section id="concepts">
+<h1>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading"></a></h1>
+</section>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="instance.html" class="btn btn-neutral float-right" title="Problem instance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
@@ -138,14 +126,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script>
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>

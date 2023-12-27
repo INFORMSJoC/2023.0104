@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exact replenishment facility placement &mdash; RoutingBlocks 01.04.2023 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="https://unpkg.com/mermaid@9.4.0/dist/mermaid.min.js"></script>
-        <script>mermaid.initialize({startOnLoad:true});</script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f9d500d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Metaheuristic components" href="alns.html" />
+    <link rel="next" title="Metaheuristic components" href="metaheuristic_components.html" />
     <link rel="prev" title="Local search" href="localsearch.html" /> 
 </head>
 
@@ -75,7 +75,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaheuristic_components.html">Metaheuristic components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
@@ -109,7 +109,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Exact replenishment facility placement</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/frvcp.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/exact_facility_placement.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -118,13 +118,13 @@
            <div itemprop="articleBody">
              
   <section id="exact-replenishment-facility-placement">
-<h1>Exact replenishment facility placement<a class="headerlink" href="#exact-replenishment-facility-placement" title="Permalink to this heading"></a></h1>
+<h1>Exact replenishment facility placement<a class="headerlink" href="#exact-replenishment-facility-placement" title="Link to this heading"></a></h1>
 <p>RoutingBlocks provides an implementation of the exact replenishment facility placement algorithm described in <span id="id1">Schiffer and Walther [<a class="reference internal" href="references.html#id5" title="Maximilian Schiffer and Grit Walther. An adaptive large neighborhood search for the location-routing problem with intra-route facilities. Transportation Science, 52(2):331–352, mar 2018.">SW18</a>]</span>.
 The algorithm models the problem as a resource-constrained shortest path problem (CSP) on an auxilliary graph, solved for each route in the solution independently. The auxilliary graph comprises a vertex for each customer node in the route, and allows detours to replenishment facilities by inserting copies of each facility between two consecutive customer vertices (See <a class="reference internal" href="#figure-1">Figure 1</a>). We refer to <span id="id2">Schiffer and Walther [<a class="reference internal" href="references.html#id5" title="Maximilian Schiffer and Grit Walther. An adaptive large neighborhood search for the location-routing problem with intra-route facilities. Transportation Science, 52(2):331–352, mar 2018.">SW18</a>]</span> for a comprehensive description of this procedure.</p>
 <figure class="align-center" id="id5">
 <span id="figure-1"></span><a class="reference internal image-reference" href="_images/auxilliary_graph.png"><img alt="_images/auxilliary_graph.png" src="_images/auxilliary_graph.png" style="width: 621.5px; height: 235.0px;" /></a>
 <figcaption>
-<p><span class="caption-text">Figure 1: Auxilliary graph for a route with three customers. The dashed lines indicate potential detours to the replenishment facilities.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Figure 1: Auxilliary graph for a route with three customers. The dashed lines indicate potential detours to the replenishment facilities.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>RoutingBlock’s implementation of this algorithm that takes care of label
@@ -141,7 +141,7 @@ The solver (<a class="reference internal" href="#routingblocks.FacilityPlacement
 </div>
 <p>The pseudocode listed below outlines how the FacilityPlacementOptimizer accesses the propagator interface:</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">Pseudocode for the FacilityPlacementOptimizer, lines using the propagator interface are highlighted.</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">Pseudocode for the FacilityPlacementOptimizer, lines using the propagator interface are highlighted.</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">extract_label</span><span class="p">():</span>
 <span class="linenos"> 2</span>    <span class="c1"># Find the vertex with the cheapest label in the node queue</span>
 <span class="linenos"> 3</span>    <span class="n">vertex_with_cheapest_label</span> <span class="o">=</span> <span class="n">find_vertex_with_cheapest_label</span><span class="p">(</span><span class="n">node_queue</span><span class="p">)</span>
@@ -189,7 +189,7 @@ The solver (<a class="reference internal" href="#routingblocks.FacilityPlacement
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="routingblocks.FacilityPlacementOptimizer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">FacilityPlacementOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">propagator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.Propagator" title="routingblocks.Propagator"><span class="pre">Propagator</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.FacilityPlacementOptimizer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">FacilityPlacementOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">propagator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.Propagator" title="routingblocks.Propagator"><span class="pre">Propagator</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.FacilityPlacementOptimizer" title="Link to this definition"></a></dt>
 <dd><p>Algorithm that inserts visits to replenishment facilities at optimal locations into a route.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -201,7 +201,7 @@ The solver (<a class="reference internal" href="#routingblocks.FacilityPlacement
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.FacilityPlacementOptimizer.optimize">
-<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_vertex_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">VertexID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.FacilityPlacementOptimizer.optimize" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_vertex_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">VertexID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.FacilityPlacementOptimizer.optimize" title="Link to this definition"></a></dt>
 <dd><p>Inserts visits to replenishment facilities at optimal locations into the route represented by the given vertex IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -220,14 +220,14 @@ The solver (<a class="reference internal" href="#routingblocks.FacilityPlacement
 
 <dl class="py class">
 <dt class="sig sig-object py" id="routingblocks.Propagator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">Propagator</span></span><a class="headerlink" href="#routingblocks.Propagator" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">Propagator</span></span><a class="headerlink" href="#routingblocks.Propagator" title="Link to this definition"></a></dt>
 <dd><p>The Propagator class implements problem-specific ordering, dominance, and propagation functions. It’s design bases on the
 concepts introduced in <span id="id4">Irnich [<a class="reference internal" href="references.html#id6" title="S. Irnich. A Unified Modeling and Solution Framework for Vehicle Routing and Local Search-Based Metaheuristics. INFORMS Journal on Computing, 20(2):270–287, may 2008.">Irn08</a>]</span>.
 Note that this class is an interface: it’s not meant to be instantiated or used directly. Please use the concrete
 implementations of this interface instead.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.cheaper_than">
-<span class="sig-name descname"><span class="pre">cheaper_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.cheaper_than" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">cheaper_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.cheaper_than" title="Link to this definition"></a></dt>
 <dd><p>Checks whether the label is cheaper than the other label, i.e., has lower cost.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -247,7 +247,7 @@ implementations of this interface instead.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.create_root_label">
-<span class="sig-name descname"><span class="pre">create_root_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.create_root_label" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_root_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.create_root_label" title="Link to this definition"></a></dt>
 <dd><p>Creates the initial label for the dynamic programming algorithm. Represents the state at the source node, i.e. the
 depot node.
 :return: The initial label.</p>
@@ -260,7 +260,7 @@ depot node.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.dominates">
-<span class="sig-name descname"><span class="pre">dominates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.dominates" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">dominates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.dominates" title="Link to this definition"></a></dt>
 <dd><p>Checks whether the label dominates the other label.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -280,7 +280,7 @@ depot node.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.extract_path">
-<span class="sig-name descname"><span class="pre">extract_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.extract_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">extract_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.extract_path" title="Link to this definition"></a></dt>
 <dd><p>Extracts the path represented by label, converting it to a list of vertex IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -297,7 +297,7 @@ depot node.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.is_final_label">
-<span class="sig-name descname"><span class="pre">is_final_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.is_final_label" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">is_final_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.is_final_label" title="Link to this definition"></a></dt>
 <dd><p>Checks whether the label is the final label, i.e. whether it represents a depot-depot path.
 :param label: The label to check.
 :return: True if the label is final, False otherwise.</p>
@@ -313,7 +313,7 @@ depot node.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.order_before">
-<span class="sig-name descname"><span class="pre">order_before</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.order_before" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">order_before</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.order_before" title="Link to this definition"></a></dt>
 <dd><p>Whether the label should be ordered before the other label. This is used to determine the order in which labels are
 stored in the set of settled labels, which is important for dominance checks: the checks considers only labels that
 would be ordered before the label being checked.</p>
@@ -335,7 +335,7 @@ would be ordered before the label being checked.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.prepare">
-<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_vertex_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">VertexID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.prepare" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_vertex_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">VertexID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.prepare" title="Link to this definition"></a></dt>
 <dd><p>Prepare the propagator before running the algorithm on the route represented by the given vertex IDs.
 :param route_vertex_ids: The vertex IDs of the route.</p>
 <dl class="field-list simple">
@@ -350,7 +350,7 @@ would be ordered before the label being checked.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="routingblocks.Propagator.propagate">
-<span class="sig-name descname"><span class="pre">propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.propagate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">Vertex</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Arc" title="routingblocks.Arc"><span class="pre">Arc</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.Propagator.propagate" title="Link to this definition"></a></dt>
 <dd><p>Propagates the label to the target vertex, using the given arc. This creates a new label that represents the state
 at the target vertex. Return None if the resulting path would be infeasible.</p>
 <dl class="field-list simple">
@@ -380,7 +380,7 @@ at the target vertex. Return None if the resulting path would be infeasible.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="localsearch.html" class="btn btn-neutral float-left" title="Local search" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="alns.html" class="btn btn-neutral float-right" title="Metaheuristic components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="metaheuristic_components.html" class="btn btn-neutral float-right" title="Metaheuristic components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

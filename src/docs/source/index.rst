@@ -17,8 +17,8 @@ Welcome to RoutingBlock's documentation!
     solution
     evaluation
     localsearch
-    frvcp
-    alns
+    exact_facility_placement
+    metaheuristic_components
     auxilliary
 
 .. toctree::

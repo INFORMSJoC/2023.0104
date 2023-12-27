@@ -58,8 +58,8 @@
 <li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
-<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact replenishment facility placement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact_facility_placement.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaheuristic_components.html">Metaheuristic components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
@@ -388,43 +388,43 @@ operators in the last period. Upon requesting an update, the weights are recalcu
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">add_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">add_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Register a new destroy operator. The weight of this operator is initialized to the average weight of all other
 destroy operators.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>destroy_operator</strong> (<a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The operator to add.</p>
+<dd class="field-odd"><p><strong>destroy_operator</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The operator to add.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator">DestroyOperator</a></p>
+<dd class="field-even"><p><a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator">DestroyOperator</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">add_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">add_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Register a new repair operator. The weight of this operator is initialized to the average weight of all other
 repair operators.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>repair_operator</strong> (<a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The operator to add.</p>
+<dd class="field-odd"><p><strong>repair_operator</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The operator to add.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator">RepairOperator</a></p>
+<dd class="field-even"><p><a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator">RepairOperator</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">collect_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">collect_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Collect the score achieved by a solution generated by the given destroy and repair operators.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>destroy_operator</strong> (<a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The destroy operator used to generate the solution.</p></li>
-<li><p><strong>repair_operator</strong> (<a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The repair operator used to generate the solution.</p></li>
+<li><p><strong>destroy_operator</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The destroy operator used to generate the solution.</p></li>
+<li><p><strong>repair_operator</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The repair operator used to generate the solution.</p></li>
 <li><p><strong>score</strong> (<em>float</em>) – The score achieved by the solution.</p></li>
 </ul>
 </dd>
@@ -451,18 +451,18 @@ Modifies the solution in-place.</p>
 <dd class="field-even"><p>A tuple containing the destroy and repair operator used to generate the solution.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tuple[<a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator">DestroyOperator</a>, <a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator">RepairOperator</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator">DestroyOperator</a>, <a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator">RepairOperator</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">remove_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">remove_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Remove a destroy operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>destroy_operator</strong> (<a class="reference internal" href="alns.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The operator to remove.</p>
+<dd class="field-odd"><p><strong>destroy_operator</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The operator to remove.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -472,11 +472,11 @@ Modifies the solution in-place.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">remove_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">remove_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Remove a repair operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>repair_operator</strong> (<a class="reference internal" href="alns.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The operator to remove.</p>
+<dd class="field-odd"><p><strong>repair_operator</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The operator to remove.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -964,13 +964,13 @@ at the target vertex. Return None if the resulting path would be infeasible.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">FacilityPlacementOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">propagator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="frvcp.html#routingblocks.Propagator" title="routingblocks.Propagator"><span class="pre">Propagator</span></a></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">FacilityPlacementOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">propagator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="exact_facility_placement.html#routingblocks.Propagator" title="routingblocks.Propagator"><span class="pre">Propagator</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Algorithm that inserts visits to replenishment facilities at optimal locations into a route.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>Instance</em></a>) – The instance.</p></li>
-<li><p><strong>propagator</strong> (<a class="reference internal" href="frvcp.html#routingblocks.Propagator" title="routingblocks.Propagator"><em>Propagator</em></a>) – The propagator to use.</p></li>
+<li><p><strong>propagator</strong> (<a class="reference internal" href="exact_facility_placement.html#routingblocks.Propagator" title="routingblocks.Propagator"><em>Propagator</em></a>) – The propagator to use.</p></li>
 </ul>
 </dd>
 </dl>
@@ -2972,7 +2972,7 @@ Modifies the solution in-place.</p>
 <dd class="field-even"><p>A move selector which selects the nth move in the sequence.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="alns.html#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector">MoveSelector</a>[T]</p>
+<dd class="field-odd"><p><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector">MoveSelector</a>[T]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2993,7 +2993,7 @@ probability <span class="math notranslate nohighlight">\((1-p)^2\)</span>, where
 <dd class="field-even"><p>The configured move selector.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="alns.html#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector">MoveSelector</a>[T]</p>
+<dd class="field-odd"><p><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector">MoveSelector</a>[T]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3044,7 +3044,7 @@ selection process.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>routingblocks.Instance</em></a>) – The problem instance</p></li>
-<li><p><strong>move_selector</strong> (<a class="reference internal" href="alns.html#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector"><em>routingblocks.operators.MoveSelector</em></a><em>[</em><a class="reference internal" href="auxilliary.html#routingblocks.RemovalMove" title="routingblocks.RemovalMove"><em>routingblocks.RemovalMove</em></a><em>]</em>) – The move selector used to choose the next vertex to remove</p></li>
+<li><p><strong>move_selector</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector"><em>routingblocks.operators.MoveSelector</em></a><em>[</em><a class="reference internal" href="auxilliary.html#routingblocks.RemovalMove" title="routingblocks.RemovalMove"><em>routingblocks.RemovalMove</em></a><em>]</em>) – The move selector used to choose the next vertex to remove</p></li>
 </ul>
 </dd>
 </dl>
@@ -3203,20 +3203,20 @@ selection process.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">ClusterRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><span class="pre">SeedSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_member_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="alns.html#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><span class="pre">ClusterMemberSelector</span></a></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">ClusterRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><span class="pre">SeedSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_member_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><span class="pre">ClusterMemberSelector</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>The ClusterRemovalOperator is a generic destroy operator that removes clusters of vertices from a solution.
 The operator first selects a seed vertex, and then selects a cluster of vertices around that seed.
 These two steps are repeated until the desired number of vertices has been selected or no seed vertices can be
 identified. The selected vertices are then removed from the solution. Note that seed vertices are not removed unless
 they are also selected by the cluster member selector.</p>
-<p>The seed selection and cluster member selection are delegated to the <a class="reference internal" href="alns.html#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.SeedSelector</span></code></a>
-and <a class="reference internal" href="alns.html#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.ClusterMemberSelector</span></code></a> parameters, respectively.
+<p>The seed selection and cluster member selection are delegated to the <a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.SeedSelector</span></code></a>
+and <a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.ClusterMemberSelector</span></code></a> parameters, respectively.
 This allows to customize the operator for different use cases.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>seed_selector</strong> (<a class="reference internal" href="alns.html#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><em>SeedSelector</em></a>) – The seed selector</p></li>
-<li><p><strong>cluster_member_selector</strong> (<a class="reference internal" href="alns.html#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><em>ClusterMemberSelector</em></a>) – The cluster member selector</p></li>
+<li><p><strong>seed_selector</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><em>SeedSelector</em></a>) – The seed selector</p></li>
+<li><p><strong>cluster_member_selector</strong> (<a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><em>ClusterMemberSelector</em></a>) – The cluster member selector</p></li>
 </ul>
 </dd>
 </dl>
@@ -3381,7 +3381,7 @@ desired number of vertices are removed.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">RelatedRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relatedness_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="alns.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><span class="pre">RelatedVertexRemovalMove</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="alns.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><span class="pre">RelatedVertexRemovalMove</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="solution.html#routingblocks.Node" title="routingblocks.Node"><span class="pre">routingblocks.Node</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">RelatedRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relatedness_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><span class="pre">RelatedVertexRemovalMove</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><span class="pre">RelatedVertexRemovalMove</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="solution.html#routingblocks.Node" title="routingblocks.Node"><span class="pre">routingblocks.Node</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Removes related vertices from the solution. The operator first selects an initial seed vertex.
 Then, it selects the n most related vertices to the current seed vertex and adds them to the list of removed vertices.
 It then selects the next seed vertex from the list of removed vertices and repeats the process until the desired number of vertices has been selected.
@@ -3393,9 +3393,9 @@ The higher the number, the more related the vertices are.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>relatedness_matrix</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em>) – The relatedness matrix. See <a class="reference internal" href="alns.html#routingblocks.operators.build_relatedness_matrix" title="routingblocks.operators.build_relatedness_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_relatedness_matrix()</span></code></a> for a way to build such a matrix.</p></li>
-<li><p><strong>move_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="alns.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><em>RelatedVertexRemovalMove</em></a><em>]</em>) – The move selector to use for selecting the vertex to remove. Receives a list of related vertices, ordered by the degree of relatedness in descending order.</p></li>
-<li><p><strong>seed_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="alns.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><em>RelatedVertexRemovalMove</em></a><em>]</em>) – The move selector to use for selecting the seed vertex.</p></li>
+<li><p><strong>relatedness_matrix</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em>) – The relatedness matrix. See <a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.build_relatedness_matrix" title="routingblocks.operators.build_relatedness_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_relatedness_matrix()</span></code></a> for a way to build such a matrix.</p></li>
+<li><p><strong>move_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><em>RelatedVertexRemovalMove</em></a><em>]</em>) – The move selector to use for selecting the vertex to remove. Receives a list of related vertices, ordered by the degree of relatedness in descending order.</p></li>
+<li><p><strong>seed_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="metaheuristic_components.html#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><em>RelatedVertexRemovalMove</em></a><em>]</em>) – The move selector to use for selecting the seed vertex.</p></li>
 <li><p><strong>initial_seed_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="solution.html#routingblocks.Node" title="routingblocks.Node"><em>routingblocks.Node</em></a><em>]</em>) – The move selector to use for selecting the initial seed vertex.</p></li>
 <li><p><strong>cluster_size</strong> (<em>int</em>) – The number of related vertices to remove for each seed.</p></li>
 </ul>

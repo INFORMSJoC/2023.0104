@@ -65,8 +65,8 @@
 <li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
-<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact replenishment facility placement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact_facility_placement.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaheuristic_components.html">Metaheuristic components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
@@ -244,7 +244,7 @@ we can solve the CVRP by simply swapping the evaluation class and creating the c
 </section>
 <section id="writing-a-native-extension">
 <h2>Writing a native extension<a class="headerlink" href="#writing-a-native-extension" title="Link to this heading"></a></h2>
-<p>Pure Python-based implementations of <a class="reference internal" href="evaluation.html#routingblocks.PyEvaluation" title="routingblocks.PyEvaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.PyEvaluation</span></code></a>, <a class="reference internal" href="evaluation.html#routingblocks.PyConcatenationBasedEvaluation" title="routingblocks.PyConcatenationBasedEvaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.PyConcatenationBasedEvaluation</span></code></a>, and <a class="reference internal" href="frvcp.html#routingblocks.Propagator" title="routingblocks.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.Propagator</span></code></a> classes suffer from a significant performance penalty. This is due to the fact that parts of the library provided in native code need to return control to python interpreter for every evaluation.
+<p>Pure Python-based implementations of <a class="reference internal" href="evaluation.html#routingblocks.PyEvaluation" title="routingblocks.PyEvaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.PyEvaluation</span></code></a>, <a class="reference internal" href="evaluation.html#routingblocks.PyConcatenationBasedEvaluation" title="routingblocks.PyConcatenationBasedEvaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.PyConcatenationBasedEvaluation</span></code></a>, and <a class="reference internal" href="exact_facility_placement.html#routingblocks.Propagator" title="routingblocks.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.Propagator</span></code></a> classes suffer from a significant performance penalty. This is due to the fact that parts of the library provided in native code need to return control to python interpreter for every evaluation.
 To avoid this, the library provides native extension interfaces for all of it’s runtime critical components.
 We provide an example of how to port the CVRP example to native code <a class="reference external" href="https://github.com/tumBAIS/routingblocks-native-extension-example">here</a>.
 Specifically, the repository provides the necessary boilerplate code for building, dependency management, packaging, publishing, and installation of custom native extensions.
