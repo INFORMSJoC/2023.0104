@@ -7,7 +7,6 @@ build-backend = "scikit_build_core.build"
 name = "routingblocks"
 version = "0.2.1"
 description = "A package for the implementation of vehicle routing problems with intermediate stops"
-readme = "README.md"
 authors = [
     { name = "Patrick Sean Klein", email = "patrick.sean.klein@tum.de" },
 ]
