@@ -1,0 +1,35 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: RoutingBlocks
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Patrick S.
+    family-names: Klein
+    email: patrick.sean.klein@tum.de
+    affiliation: >-
+      Professorship of Business Analytics & Intelligent
+      Systems, Technical University of Munich 
+    orcid: 'https://orcid.org/0000-0002-2851-6047'
+  - given-names: Schiffer
+    family-names: Maximilian
+    email: schiffer@tum.de
+    affiliation: >-
+      Professorship of Business Analytics & Intelligent
+      Systems, Technical University of Munich 
+    orcid: 'https://orcid.org/0000-0003-2682-4975'
+identifiers:
+  - type: doi
+    value: 10.1287/ijoc.2023.0104.cd
+    description: Code
+  - type: doi
+    value: 10.1287/ijoc.2023.0104
+    description: Paper
+repository-code: 'https://github.com/INFORMSJoC/2023.0104'
+repository: 'https://github.com/tumBAIS/RoutingBlocks'
+license: MIT
+commit: 441747a45e474c93756b489b54f4dac807c67d52

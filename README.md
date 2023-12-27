@@ -12,7 +12,7 @@ Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](
 The software and data in this repository are a snapshot of the software and data
 that were used in the research reported on in the paper 
 [RoutingBlocks: An open-source Python package for Vehicle Routing Problems with Intermediate Stops](https://doi.org/10.1287/ijoc.2023.0104) by P. S. Klein and Maximilian Schiffer. 
-The snapshot is based on [this SHA](https://github.com/tumBAIS/RoutingBlocks/commit/441747a45e474c93756b489b54f4dac807c67d52) 
+The snapshot is based on [this SHA](https://github.com/tumBAIS/RoutingBlocks/commit/2d2ee06c79b5d458b1aeeafd95a2b42b5441079a) 
 in the development repository. 
 
 **Important: This code is being developed on an on-going basis at 
