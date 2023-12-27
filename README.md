@@ -1,4 +1,46 @@
+[![INFORMS Journal on Computing Logo](https://INFORMSJoC.github.io/logos/INFORMS_Journal_on_Computing_Header.jpg)](https://pubsonline.informs.org/journal/ijoc)
+
 # 2023.0104 - RoutingBlocks
+
+This archive is distributed in association with the [INFORMS Journal on
+Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](LICENSE).
+
+
+This archive is distributed in association with the [INFORMS Journal on
+Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](LICENSE).
+
+The software and data in this repository are a snapshot of the software and data
+that were used in the research reported on in the paper 
+[RoutingBlocks: An open-source Python package for Vehicle Routing Problems with Intermediate Stops](https://doi.org/10.1287/ijoc.2023.0104) by P. S. Klein and Maximilian Schiffer. 
+The snapshot is based on [this SHA](https://github.com/tumBAIS/RoutingBlocks/commit/441747a45e474c93756b489b54f4dac807c67d52) 
+in the development repository. 
+
+**Important: This code is being developed on an on-going basis at 
+[https://github.com/tumBAIS/RoutingBlocks](https://github.com/tumBAIS/routingblocks). Please go there if you would like to
+get a more recent version or would like support**
+
+## Cite
+
+To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
+
+[https://doi.org/10.1287/ijoc.2023.0104](https://doi.org/10.1287/ijoc.2023.0104)
+
+[https://doi.org/10.1287/ijoc.2023.0104.cd](https://doi.org/10.1287/ijoc.2023.0104.cd)
+
+Below is the BibTex for citing this snapshot of the repository.
+
+```
+@article{RoutingBlocks,
+  author =        {P. S. Klein, M. Schiffer},
+  publisher =     {INFORMS Journal on Computing},
+  title =         {{RoutingBlocks}},
+  year =          {2023},
+  doi =           {10.1287/ijoc.2023.0104.cd},
+  url =           {https://github.com/INFORMSJoC/2023.0104},
+}  
+```
+
+## Description
 
 `RoutingBlocks` is an open-source Python package for the implementation of algorithms for Vehicle Routing Problems with
 Intermediate Stops.
@@ -6,8 +48,6 @@ Intermediate Stops.
 It provides a set of modular algorithmic components and efficient data structures that can be used as building blocks
 for problem-specific metaheuristic algorithms. These components are tailored specifically to tackle the challenges of
 VRPIS, but can be used for other classes of vehicle routing problems as well.
-
-*This package is under active development. Expect potentially breaking changes.*
 
 ## Installation
 
@@ -43,31 +83,6 @@ of this repository.
 
 Further documentation is available
 at [readthedocs](https://routingblocks.readthedocs.io/en/latest/getting_started.html).
-
-## Cite
-
-To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
-
-[https://doi.org/10.1287/ijoc.2023.0104](https://doi.org/10.1287/ijoc.2023.0104)
-
-[https://doi.org/10.1287/ijoc.2023.0104.cd](https://doi.org/10.1287/ijoc.2023.0104.cd)
-
-Below is the BibTex for citing this snapshot of the repository.
-
-```
-@article{RoutingBlocks,
-  author =        {P. S. Klein, M. Schiffer},
-  publisher =     {INFORMS Journal on Computing},
-  title =         {{RoutingBlocks}},
-  year =          {2023},
-  doi =           {10.1287/ijoc.2023.0104.cd},
-  url =           {https://github.com/INFORMSJoC/2023.0104},
-}  
-```
-## Ongoing Development
-
-This code is being developed on an on-going basis at the author's
-[Github site](https://github.com/tumBAIS/routingblocks).
 
 ## Contributing
 
