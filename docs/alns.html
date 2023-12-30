@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metaheuristic components &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="https://unpkg.com/mermaid@9.4.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Auxiliary algorithms and data structures" href="auxilliary.html" />
+    <link rel="prev" title="Exact replenishment facility placement" href="frvcp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RoutingBlocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_operators.html">Custom operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_problem_settings.html">Custom problem settings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="instance.html">Problem instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Metaheuristic components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#destroy-operators">Destroy operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.WorstRemovalOperator"><code class="docutils literal notranslate"><span class="pre">WorstRemovalOperator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.ClusterRemovalOperator"><code class="docutils literal notranslate"><span class="pre">ClusterRemovalOperator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.StationVicinityRemovalOperator"><code class="docutils literal notranslate"><span class="pre">StationVicinityRemovalOperator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.RelatedRemovalOperator"><code class="docutils literal notranslate"><span class="pre">RelatedRemovalOperator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove"><code class="docutils literal notranslate"><span class="pre">RelatedVertexRemovalMove</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove.vertex_id"><code class="docutils literal notranslate"><span class="pre">RelatedVertexRemovalMove.vertex_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove.relatedness"><code class="docutils literal notranslate"><span class="pre">RelatedVertexRemovalMove.relatedness</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove.location"><code class="docutils literal notranslate"><span class="pre">RelatedVertexRemovalMove.location</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.RouteRemovalOperator"><code class="docutils literal notranslate"><span class="pre">RouteRemovalOperator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.RandomRemovalOperator"><code class="docutils literal notranslate"><span class="pre">RandomRemovalOperator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#insertion-operators">Insertion operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.BestInsertionOperator"><code class="docutils literal notranslate"><span class="pre">BestInsertionOperator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.operators.RandomInsertionOperator"><code class="docutils literal notranslate"><span class="pre">RandomInsertionOperator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operator-customization">Operator customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#move-selectors">Move Selectors</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.MoveSelector"><code class="docutils literal notranslate"><span class="pre">MoveSelector</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#routingblocks.operators.MoveSelector.__call__"><code class="docutils literal notranslate"><span class="pre">MoveSelector.__call__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.first_move_selector"><code class="docutils literal notranslate"><span class="pre">first_move_selector()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.last_move_selector"><code class="docutils literal notranslate"><span class="pre">last_move_selector()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.nth_move_selector_factory"><code class="docutils literal notranslate"><span class="pre">nth_move_selector_factory()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.blink_selector_factory"><code class="docutils literal notranslate"><span class="pre">blink_selector_factory()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.random_selector_factory"><code class="docutils literal notranslate"><span class="pre">random_selector_factory()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#other">Other</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.SeedSelector"><code class="docutils literal notranslate"><span class="pre">SeedSelector</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#routingblocks.operators.SeedSelector.__call__"><code class="docutils literal notranslate"><span class="pre">SeedSelector.__call__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.ClusterMemberSelector"><code class="docutils literal notranslate"><span class="pre">ClusterMemberSelector</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#routingblocks.operators.ClusterMemberSelector.__call__"><code class="docutils literal notranslate"><span class="pre">ClusterMemberSelector.__call__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#routingblocks.operators.build_relatedness_matrix"><code class="docutils literal notranslate"><span class="pre">build_relatedness_matrix()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-operators">Custom operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.DestroyOperator"><code class="docutils literal notranslate"><span class="pre">DestroyOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.DestroyOperator.apply"><code class="docutils literal notranslate"><span class="pre">DestroyOperator.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.DestroyOperator.can_apply_to"><code class="docutils literal notranslate"><span class="pre">DestroyOperator.can_apply_to()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.DestroyOperator.name"><code class="docutils literal notranslate"><span class="pre">DestroyOperator.name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.RepairOperator"><code class="docutils literal notranslate"><span class="pre">RepairOperator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.RepairOperator.apply"><code class="docutils literal notranslate"><span class="pre">RepairOperator.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.RepairOperator.can_apply_to"><code class="docutils literal notranslate"><span class="pre">RepairOperator.can_apply_to()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.RepairOperator.name"><code class="docutils literal notranslate"><span class="pre">RepairOperator.name()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#solvers">Solvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.LargeNeighborhood"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.LargeNeighborhood.add_destroy_operator"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood.add_destroy_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.LargeNeighborhood.add_repair_operator"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood.add_repair_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.LargeNeighborhood.generate"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.LargeNeighborhood.remove_destroy_operator"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood.remove_destroy_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.LargeNeighborhood.remove_repair_operator"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood.remove_repair_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.LargeNeighborhood.destroy_operators"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood.destroy_operators</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.LargeNeighborhood.repair_operators"><code class="docutils literal notranslate"><span class="pre">LargeNeighborhood.repair_operators</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.adapt_operator_weights"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.adapt_operator_weights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.add_destroy_operator"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.add_destroy_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.add_repair_operator"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.add_repair_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.collect_score"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.collect_score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.generate"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.generate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.remove_destroy_operator"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.remove_destroy_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.remove_repair_operator"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.remove_repair_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.reset_operator_weights"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.reset_operator_weights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.destroy_operators"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.destroy_operators</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routingblocks.AdaptiveLargeNeighborhood.repair_operators"><code class="docutils literal notranslate"><span class="pre">AdaptiveLargeNeighborhood.repair_operators</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adptw.html">ADPTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="niftw.html">NIFTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribution opportunities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks class index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RoutingBlocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Metaheuristic components</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/alns.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metaheuristic-components">
+<span id="alns"></span><h1>Metaheuristic components<a class="headerlink" href="#metaheuristic-components" title="Permalink to this heading"></a></h1>
+<section id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<p>The routingblocks package provides a set of destroy and repair operators that remove and insert vertices into a
+solution, respectively.</p>
+<section id="destroy-operators">
+<span id="alns-operators"></span><h3>Destroy operators<a class="headerlink" href="#destroy-operators" title="Permalink to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.WorstRemovalOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">WorstRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">routingblocks.Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">move_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="auxilliary.html#routingblocks.RemovalMove" title="routingblocks.RemovalMove"><span class="pre">routingblocks.RemovalMove</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.WorstRemovalOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Iteratively (one at a time) removes vertices according to the benefit yielded by removing them, i.e., the change in
+the solution’s cost with and without the vertex.</p>
+<p>The operator uses a <code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.MoveSelector[routingblocks.RemovalMove]</span></code> to choose the
+next vertex to remove. This selector receives as argument a list of <a class="reference internal" href="auxilliary.html#routingblocks.RemovalMove" title="routingblocks.RemovalMove"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.RemovalMove</span></code></a> objects,
+each one representing a possible removal of a vertex from the solution, ordered by cost improvement.</p>
+<p>This allows to customize the operator to different removal strategies, such as removing the vertex with the
+highest cost improvement, removing the vertex with the lowest cost improvement, or introducing randomness in the
+selection process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>routingblocks.Instance</em></a>) – The problem instance</p></li>
+<li><p><strong>move_selector</strong> (<a class="reference internal" href="#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector"><em>routingblocks.operators.MoveSelector</em></a><em>[</em><a class="reference internal" href="auxilliary.html#routingblocks.RemovalMove" title="routingblocks.RemovalMove"><em>routingblocks.RemovalMove</em></a><em>]</em>) – The move selector used to choose the next vertex to remove</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.ClusterRemovalOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">ClusterRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><span class="pre">SeedSelector</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_member_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><span class="pre">ClusterMemberSelector</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.ClusterRemovalOperator" title="Permalink to this definition"></a></dt>
+<dd><p>The ClusterRemovalOperator is a generic destroy operator that removes clusters of vertices from a solution.
+The operator first selects a seed vertex, and then selects a cluster of vertices around that seed.
+These two steps are repeated until the desired number of vertices has been selected or no seed vertices can be
+identified. The selected vertices are then removed from the solution. Note that seed vertices are not removed unless
+they are also selected by the cluster member selector.</p>
+<p>The seed selection and cluster member selection are delegated to the <a class="reference internal" href="#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.SeedSelector</span></code></a>
+and <a class="reference internal" href="#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.ClusterMemberSelector</span></code></a> parameters, respectively.
+This allows to customize the operator for different use cases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seed_selector</strong> (<a class="reference internal" href="#routingblocks.operators.SeedSelector" title="routingblocks.operators.SeedSelector"><em>SeedSelector</em></a>) – The seed selector</p></li>
+<li><p><strong>cluster_member_selector</strong> (<a class="reference internal" href="#routingblocks.operators.ClusterMemberSelector" title="routingblocks.operators.ClusterMemberSelector"><em>ClusterMemberSelector</em></a>) – The cluster member selector</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.StationVicinityRemovalOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">StationVicinityRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">routingblocks.Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">routingblocks.Vertex</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><span class="pre">routingblocks.Vertex</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_radius_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_radius_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randgen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.Randgen</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.StationVicinityRemovalOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Station vicinity removal is a specialized cluster removal operator designed to reorder customer visits in the
+vicinity of replenishment stations. The operator defines the vicinity of a station by selecting a random radius
+based on a percentage of the maximum distance between vertices. It then randomly chooses a recharging station
+and removes the station along with vertices within the selected radius, repeating this process until the
+desired number of vertices are removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>routingblocks.Instance</em></a>) – Instance the operator will be applied to</p></li>
+<li><p><strong>get_distance</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>routingblocks.Vertex</em></a><em>, </em><a class="reference internal" href="instance.html#routingblocks.Vertex" title="routingblocks.Vertex"><em>routingblocks.Vertex</em></a><em>]</em><em>, </em><em>float</em><em>]</em>) – A function taking two vertices and returning the distance between them. The distance can be arbitrary, i.e., does not have to correspond to the evaluation function.</p></li>
+<li><p><strong>min_radius_factor</strong> (<em>float</em>) – Minimum of the interval the radius is picked from</p></li>
+<li><p><strong>max_radius_factor</strong> (<em>float</em>) – Maximum of the interval the radius is picked from</p></li>
+<li><p><strong>randgen</strong> (<em>Optional</em><em>[</em><em>routingblocks.Randgen</em><em>]</em>) – Random number generator</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.RelatedRemovalOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">RelatedRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relatedness_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><span class="pre">RelatedVertexRemovalMove</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><span class="pre">RelatedVertexRemovalMove</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_seed_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="solution.html#routingblocks.Node" title="routingblocks.Node"><span class="pre">routingblocks.Node</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.RelatedRemovalOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Removes related vertices from the solution. The operator first selects an initial seed vertex.
+Then, it selects the n most related vertices to the current seed vertex and adds them to the list of removed vertices.
+It then selects the next seed vertex from the list of removed vertices and repeats the process until the desired number of vertices has been selected.
+Finally, the operator removes the selected vertices from the solution.</p>
+<p>The operator determines related vertices by using a relatedness matrix passed to the constructor.
+This matrix contains a number that measures the degree of the relatedness between each pair of vertices.
+The higher the number, the more related the vertices are.</p>
+<p>(Initial) seed and related vertex selection is done using move selectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relatedness_matrix</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em>) – The relatedness matrix. See <a class="reference internal" href="#routingblocks.operators.build_relatedness_matrix" title="routingblocks.operators.build_relatedness_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_relatedness_matrix()</span></code></a> for a way to build such a matrix.</p></li>
+<li><p><strong>move_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><em>RelatedVertexRemovalMove</em></a><em>]</em>) – The move selector to use for selecting the vertex to remove. Receives a list of related vertices, ordered by the degree of relatedness in descending order.</p></li>
+<li><p><strong>seed_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="#routingblocks.operators.RelatedVertexRemovalMove" title="routingblocks.operators.RelatedVertexRemovalMove"><em>RelatedVertexRemovalMove</em></a><em>]</em>) – The move selector to use for selecting the seed vertex.</p></li>
+<li><p><strong>initial_seed_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="solution.html#routingblocks.Node" title="routingblocks.Node"><em>routingblocks.Node</em></a><em>]</em>) – The move selector to use for selecting the initial seed vertex.</p></li>
+<li><p><strong>cluster_size</strong> (<em>int</em>) – The number of related vertices to remove for each seed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.RelatedVertexRemovalMove">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">RelatedVertexRemovalMove</span></span><a class="headerlink" href="#routingblocks.operators.RelatedVertexRemovalMove" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vertex_id</strong> – The id of the corresponding vertex.</p></li>
+<li><p><strong>relatedness</strong> – The relatedness of the vertex to the seed vertex.</p></li>
+<li><p><strong>location</strong> – The location of the vertex in the solution.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.operators.RelatedVertexRemovalMove.vertex_id">
+<span class="sig-name descname"><span class="pre">vertex_id</span></span><a class="headerlink" href="#routingblocks.operators.RelatedVertexRemovalMove.vertex_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.operators.RelatedVertexRemovalMove.relatedness">
+<span class="sig-name descname"><span class="pre">relatedness</span></span><a class="headerlink" href="#routingblocks.operators.RelatedVertexRemovalMove.relatedness" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="routingblocks.operators.RelatedVertexRemovalMove.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#routingblocks.operators.RelatedVertexRemovalMove.location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.RouteRemovalOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">RouteRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><span class="pre">routingblocks.Random</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.RouteRemovalOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Removes random routes from the solution. May remove more than the requested number of vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rng</strong> (<a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><em>routingblocks.Random</em></a>) – The <a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.Random</span></code></a> instance to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.RandomRemovalOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">RandomRemovalOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><span class="pre">Random</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.RandomRemovalOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Removes random vertices from the solution. Note that the same vertex may apppear several times, i.e., if two
+visits to the same vertex are removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>random</strong> (<a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><em>Random</em></a>) – The random number generator used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="insertion-operators">
+<h3>Insertion operators<a class="headerlink" href="#insertion-operators" title="Permalink to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.BestInsertionOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">BestInsertionOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">routingblocks.Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">move_selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.operators.move_selectors.MoveSelector</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="auxilliary.html#routingblocks.InsertionMove" title="routingblocks.InsertionMove"><span class="pre">routingblocks.InsertionMove</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.BestInsertionOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Iteratively (one at a time) inserts vertices according to the cost incurred from inserting them.</p>
+<p>The operator uses a <code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.operators.MoveSelector[routingblocks.InsertionMove]</span></code> to choose the
+next vertex to insert. This selector receives as argument a list of <a class="reference internal" href="auxilliary.html#routingblocks.InsertionMove" title="routingblocks.InsertionMove"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.InsertionMove</span></code></a> objects,
+each one representing a possible location at which the next vertex can be inserted, ordered by cost in descending order.</p>
+<p>This allows to customize the operator to different insertion strategies, such as inserting the vertex at the location
+with the lowest cost, inserting the vertex at the location with the highest cost, or introducing randomness in the
+selection process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>routingblocks.Instance</em></a>) – The problem instance</p></li>
+<li><p><strong>move_selector</strong> (<em>routingblocks.operators.move_selectors.MoveSelector</em><em>[</em><a class="reference internal" href="auxilliary.html#routingblocks.InsertionMove" title="routingblocks.InsertionMove"><em>routingblocks.InsertionMove</em></a><em>]</em>) – The move selector used to choose the next insertion position</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.RandomInsertionOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">RandomInsertionOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><span class="pre">Random</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.RandomInsertionOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Inserts vertices at random positions in the solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>random</strong> (<a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><em>Random</em></a>) – The <a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.Random</span></code></a> instance to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="operator-customization">
+<h3>Operator customization<a class="headerlink" href="#operator-customization" title="Permalink to this heading"></a></h3>
+<section id="move-selectors">
+<h4>Move Selectors<a class="headerlink" href="#move-selectors" title="Permalink to this heading"></a></h4>
+<p>RoutingBlocks uses the concept of move selectors to customize destroy and repair operator behavior.
+These select a move from a sequence of possible moves.
+Their interface can often be implemented as a lambda function, but it is possible to implement stateful move selectors as well.
+The interface is as follows:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.MoveSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">MoveSelector</span></span><a class="headerlink" href="#routingblocks.operators.MoveSelector" title="Permalink to this definition"></a></dt>
+<dd><p>A move selector selects a move from a sequence of moves.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.operators.MoveSelector.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moves</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.MoveSelector.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Selects a move from the sequence of moves.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>moves</strong> (<em>Iterable</em><em>[</em><em>T</em><em>]</em>) – The sequence of moves.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The selected move.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>The following example illustrates two simple move selectors. The first one always selects the first move, the second one
+chooses a move at random:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Selects the first move.</span>
+<span class="k">def</span> <span class="nf">my_first_move_selector</span><span class="p">(</span><span class="n">moves</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="n">moves</span><span class="p">)</span>
+
+<span class="c1"># Selects a move at random.</span>
+<span class="k">class</span> <span class="nc">my_random_move_selector</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_generator</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">random_generator</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">moves</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">moves</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>RoutingBlocks provides a set of pre-defined move selectors:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.operators.first_move_selector">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">first_move_selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moves</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.first_move_selector" title="Permalink to this definition"></a></dt>
+<dd><p>Selects the first move in the sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>moves</strong> (<em>Iterable</em><em>[</em><em>T</em><em>]</em>) – The sequence of moves.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The first move in the sequence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.operators.last_move_selector">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">last_move_selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moves</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.last_move_selector" title="Permalink to this definition"></a></dt>
+<dd><p>Selects the last move in the sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>moves</strong> (<em>Iterable</em><em>[</em><em>T</em><em>]</em>) – The sequence of moves.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The last move in the sequence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.operators.nth_move_selector_factory">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">nth_move_selector_factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.nth_move_selector_factory" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a move selector which selects the nth move in the sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – The index of the move to select.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A move selector which selects the nth move in the sequence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector">MoveSelector</a>[T]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.operators.blink_selector_factory">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">blink_selector_factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blink_probability</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randgen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><span class="pre">routingblocks.Random</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.blink_selector_factory" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a move selector which selects the first move of the sequence with probability <span class="math notranslate nohighlight">\((1-p)\)</span>, the second move with
+probability <span class="math notranslate nohighlight">\((1-p)^2\)</span>, where <span class="math notranslate nohighlight">\(p\)</span> is the blink probability, and so on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blink_probability</strong> (<em>float</em>) – The probability of blinking.</p></li>
+<li><p><strong>randgen</strong> (<a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><em>routingblocks.Random</em></a>) – The random number generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The configured move selector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#routingblocks.operators.MoveSelector" title="routingblocks.operators.MoveSelector">MoveSelector</a>[T]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.operators.random_selector_factory">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">random_selector_factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rangen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><span class="pre">routingblocks.Random</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.random_selector_factory" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a move selector which selects a random move from the sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rangen</strong> (<a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><em>routingblocks.Random</em></a>) – The random number generator.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The configured move selector.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="other">
+<h4>Other<a class="headerlink" href="#other" title="Permalink to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.SeedSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">SeedSelector</span></span><a class="headerlink" href="#routingblocks.operators.SeedSelector" title="Permalink to this definition"></a></dt>
+<dd><p>Selects a seed vertex from a solution.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.operators.SeedSelector.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.Evaluation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><span class="pre">routingblocks.Solution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">already_selected_vertices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="solution.html#routingblocks.NodeLocation" title="routingblocks.NodeLocation"><span class="pre">routingblocks.NodeLocation</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.SeedSelector.__call__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<em>routingblocks.Evaluation</em>) – The evaluation to use</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><em>routingblocks.Solution</em></a>) – The solution to select from</p></li>
+<li><p><strong>already_selected_vertices</strong> (<em>List</em><em>[</em><a class="reference internal" href="solution.html#routingblocks.NodeLocation" title="routingblocks.NodeLocation"><em>routingblocks.NodeLocation</em></a><em>]</em>) – A list of vertices that have already been selected, i.e., should not be included in the selection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="solution.html#routingblocks.NodeLocation" title="routingblocks.NodeLocation">routingblocks.NodeLocation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.operators.ClusterMemberSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">ClusterMemberSelector</span></span><a class="headerlink" href="#routingblocks.operators.ClusterMemberSelector" title="Permalink to this definition"></a></dt>
+<dd><p>Selects a cluster of vertices based on a seed vertex.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.operators.ClusterMemberSelector.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks.Evaluation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><span class="pre">routingblocks.Solution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.NodeLocation" title="routingblocks.NodeLocation"><span class="pre">routingblocks.NodeLocation</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.ClusterMemberSelector.__call__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<em>routingblocks.Evaluation</em>) – The evaluation to use</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><em>routingblocks.Solution</em></a>) – The solution to select from</p></li>
+<li><p><strong>seed</strong> (<a class="reference internal" href="solution.html#routingblocks.NodeLocation" title="routingblocks.NodeLocation"><em>routingblocks.NodeLocation</em></a>) – The seed vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="solution.html#routingblocks.NodeLocation" title="routingblocks.NodeLocation">routingblocks.NodeLocation</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="routingblocks.operators.build_relatedness_matrix">
+<span class="sig-prename descclassname"><span class="pre">routingblocks.operators.</span></span><span class="sig-name descname"><span class="pre">build_relatedness_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><span class="pre">routingblocks.Instance</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">relatedness_computer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.operators.build_relatedness_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Builds a relatedness matrix for the given instance and relatedness function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instance</strong> (<a class="reference internal" href="instance.html#routingblocks.Instance" title="routingblocks.Instance"><em>routingblocks.Instance</em></a>) – The instance.</p></li>
+<li><p><strong>relatedness_computer</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>, </em><em>float</em><em>]</em>) – A function that computes the relatedness between two vertices. Takes as input the ids of the two vertices and returns a number that measures the degree of relatedness.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A matrix of relatedness values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[List[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+<section id="custom-operators">
+<span id="alns-custom-operators"></span><h2>Custom operators<a class="headerlink" href="#custom-operators" title="Permalink to this heading"></a></h2>
+<p>Custom operators can be implemented by inheriting from the abstract base classes <a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.DestroyOperator</span></code></a> and <a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">routingblocks.RepairOperator</span></code></a> for destroy and repair operators, respectively. See <a class="reference internal" href="custom_operators.html#custom-destroy-operator"><span class="std std-ref">here</span></a> for an example.
+The interfaces are as follows:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.DestroyOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">DestroyOperator</span></span><a class="headerlink" href="#routingblocks.DestroyOperator" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.DestroyOperator.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="niftw.html#routingblocks.niftw.Evaluation" title="routingblocks.niftw.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><span class="pre">Solution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_vertices_to_remove</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.DestroyOperator.apply" title="Permalink to this definition"></a></dt>
+<dd><p>Apply this operator to the given solution. The solution is modified in-place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<a class="reference internal" href="niftw.html#routingblocks.niftw.Evaluation" title="routingblocks.niftw.Evaluation"><em>Evaluation</em></a>) – The evaluation function to use.</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><em>Solution</em></a>) – The solution to apply the operator to.</p></li>
+<li><p><strong>number_of_vertices_to_remove</strong> (<em>int</em>) – The number of vertices to remove from the solution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list containing the IDs of the vertices that were removed from the solution.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[VertexID]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.DestroyOperator.can_apply_to">
+<span class="sig-name descname"><span class="pre">can_apply_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><span class="pre">Solution</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.DestroyOperator.can_apply_to" title="Permalink to this definition"></a></dt>
+<dd><p>Check if this operator can be applied to the given solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>solution</strong> (<a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><em>Solution</em></a>) – The solution to check.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.DestroyOperator.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.DestroyOperator.name" title="Permalink to this definition"></a></dt>
+<dd><p>Get the name of this operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.RepairOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">RepairOperator</span></span><a class="headerlink" href="#routingblocks.RepairOperator" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.RepairOperator.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="niftw.html#routingblocks.niftw.Evaluation" title="routingblocks.niftw.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><span class="pre">Solution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">removed_vertex_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">VertexID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.RepairOperator.apply" title="Permalink to this definition"></a></dt>
+<dd><p>Apply this operator to the given solution. The solution is modified in-place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<a class="reference internal" href="niftw.html#routingblocks.niftw.Evaluation" title="routingblocks.niftw.Evaluation"><em>Evaluation</em></a>) – The evaluation function to use.</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><em>Solution</em></a>) – The solution to apply the operator to.</p></li>
+<li><p><strong>removed_vertex_ids</strong> (<em>List</em><em>[</em><em>VertexID</em><em>]</em>) – The IDs of the vertices that should be inserted into the solution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.RepairOperator.can_apply_to">
+<span class="sig-name descname"><span class="pre">can_apply_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><span class="pre">Solution</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.RepairOperator.can_apply_to" title="Permalink to this definition"></a></dt>
+<dd><p>Check if this operator can be applied to the given solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>solution</strong> (<a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><em>Solution</em></a>) – The solution to check.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.RepairOperator.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.RepairOperator.name" title="Permalink to this definition"></a></dt>
+<dd><p>Get the name of this operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="solvers">
+<h2>Solvers<a class="headerlink" href="#solvers" title="Permalink to this heading"></a></h2>
+<p>RoutingBlocks provides (A)LNS solvers that can be extended with arbitrary destroy and repair operators.
+The solvers manage operator selection, operator weights, and solution generation. We note that this solver can also be
+used to implement other perturbation-based algorithms. Their interfaces are as follows:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">LargeNeighborhood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">randgen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks._routingblocks.Random</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.LargeNeighborhood" title="Permalink to this definition"></a></dt>
+<dd><p>LNS solver.</p>
+<p>The solver uses a destroy and repair operator to iteratively generate new solutions. The destroy operator is used to
+remove a number of vertices from the solution, while the repair operator is used to re-insert the removed vertices
+into the solution.</p>
+<p>Destroy and repair operators are selected uniformly from a pool of registered operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>randgen</strong> (<em>routingblocks._routingblocks.Random</em>) – Random number generator.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood.add_destroy_operator">
+<span class="sig-name descname"><span class="pre">add_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks._routingblocks.DestroyOperator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.LargeNeighborhood.add_destroy_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Register a new destroy operator. The weight of this operator is initialized to the average weight of all other
+destroy operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>destroy_operator</strong> (<em>routingblocks._routingblocks.DestroyOperator</em>) – The operator to add.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>routingblocks._routingblocks.DestroyOperator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood.add_repair_operator">
+<span class="sig-name descname"><span class="pre">add_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks._routingblocks.RepairOperator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.LargeNeighborhood.add_repair_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Register a new repair operator. The weight of this operator is initialized to the average weight of all other
+repair operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>repair_operator</strong> (<em>routingblocks._routingblocks.RepairOperator</em>) – The operator to add.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>routingblocks._routingblocks.RepairOperator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks._routingblocks.Evaluation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks._routingblocks.Solution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_vertices_to_remove</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.LargeNeighborhood.generate" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a new solution by applying a destroy and repair operator selected randomly.
+Modifies the solution in-place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<em>routingblocks._routingblocks.Evaluation</em>) – The evaluation function to use.</p></li>
+<li><p><strong>solution</strong> (<em>routingblocks._routingblocks.Solution</em>) – The solution to generate a new solution from.</p></li>
+<li><p><strong>number_of_vertices_to_remove</strong> (<em>int</em>) – The number of vertices to remove from the solution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the destroy and repair operator used to generate the solution.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[routingblocks._routingblocks.DestroyOperator, routingblocks._routingblocks.RepairOperator]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood.remove_destroy_operator">
+<span class="sig-name descname"><span class="pre">remove_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks._routingblocks.DestroyOperator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.LargeNeighborhood.remove_destroy_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Remove a destroy operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>destroy_operator</strong> (<em>routingblocks._routingblocks.DestroyOperator</em>) – The operator to remove.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood.remove_repair_operator">
+<span class="sig-name descname"><span class="pre">remove_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">routingblocks._routingblocks.RepairOperator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.LargeNeighborhood.remove_repair_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Remove a repair operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>repair_operator</strong> (<em>routingblocks._routingblocks.RepairOperator</em>) – The operator to remove.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood.destroy_operators">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">destroy_operators</span></span><a class="headerlink" href="#routingblocks.LargeNeighborhood.destroy_operators" title="Permalink to this definition"></a></dt>
+<dd><p>Get an iterator over all registered destroy operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Iterator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.LargeNeighborhood.repair_operators">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repair_operators</span></span><a class="headerlink" href="#routingblocks.LargeNeighborhood.repair_operators" title="Permalink to this definition"></a></dt>
+<dd><p>Get an iterator over all registered repair operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Iterator</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">routingblocks.</span></span><span class="sig-name descname"><span class="pre">AdaptiveLargeNeighborhood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">randgen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><span class="pre">Random</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood" title="Permalink to this definition"></a></dt>
+<dd><p>ALNS solver.
+Initially, all operators are assigned equal weights of 1. The weights are then adapted based on the performance of the
+operators in the last period. Upon requesting an update, the weights are recalculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[w_{op, new} = \alpha \cdot \frac{s_{op}}{\max(1, n_{op})} + (1 - \alpha) \cdot w_{op, old}\]</div>
+<p>Where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_{op, new}\)</span> is the updated weight of operator <span class="math notranslate nohighlight">\(op\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is the smoothing factor, which determines the importance of an operator’s historical performance</p></li>
+<li><p><span class="math notranslate nohighlight">\(s_{op}\)</span> is the sum of scores achieved by operator <span class="math notranslate nohighlight">\(op\)</span> in the last period</p></li>
+<li><p><span class="math notranslate nohighlight">\(n_{op}\)</span> is the total number of solutions generated using operator <span class="math notranslate nohighlight">\(op\)</span> in the last period</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_{op, old}\)</span> is the old weight of operator <span class="math notranslate nohighlight">\(op\)</span></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>randgen</strong> (<a class="reference internal" href="auxilliary.html#routingblocks.Random" title="routingblocks.Random"><em>Random</em></a>) – Random number generator.</p></li>
+<li><p><strong>smoothing_factor</strong> (<em>float</em>) – Smoothing factor for the adaptive weights. Determines the importance of the historical</p></li>
+</ul>
+</dd>
+</dl>
+<p>performance of the operators.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.adapt_operator_weights">
+<span class="sig-name descname"><span class="pre">adapt_operator_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.adapt_operator_weights" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the new weights for the operators based on their respective performance in the last period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.add_destroy_operator">
+<span class="sig-name descname"><span class="pre">add_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.add_destroy_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Register a new destroy operator. The weight of this operator is initialized to the average weight of all other
+destroy operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>destroy_operator</strong> (<a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The operator to add.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator">DestroyOperator</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.add_repair_operator">
+<span class="sig-name descname"><span class="pre">add_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.add_repair_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Register a new repair operator. The weight of this operator is initialized to the average weight of all other
+repair operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>repair_operator</strong> (<a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The operator to add.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator">RepairOperator</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.collect_score">
+<span class="sig-name descname"><span class="pre">collect_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.collect_score" title="Permalink to this definition"></a></dt>
+<dd><p>Collect the score achieved by a solution generated by the given destroy and repair operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>destroy_operator</strong> (<a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The destroy operator used to generate the solution.</p></li>
+<li><p><strong>repair_operator</strong> (<a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The repair operator used to generate the solution.</p></li>
+<li><p><strong>score</strong> (<em>float</em>) – The score achieved by the solution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="niftw.html#routingblocks.niftw.Evaluation" title="routingblocks.niftw.Evaluation"><span class="pre">Evaluation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><span class="pre">Solution</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_vertices_to_remove</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.generate" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a new solution by applying a destroy and repair operator selected based the on the operator weights.
+Modifies the solution in-place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evaluation</strong> (<a class="reference internal" href="niftw.html#routingblocks.niftw.Evaluation" title="routingblocks.niftw.Evaluation"><em>Evaluation</em></a>) – The evaluation function to use.</p></li>
+<li><p><strong>solution</strong> (<a class="reference internal" href="solution.html#routingblocks.Solution" title="routingblocks.Solution"><em>Solution</em></a>) – The solution to generate a new solution from.</p></li>
+<li><p><strong>number_of_vertices_to_remove</strong> (<em>int</em>) – The number of vertices to remove from the solution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the destroy and repair operator used to generate the solution.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[<a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator">DestroyOperator</a>, <a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator">RepairOperator</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.remove_destroy_operator">
+<span class="sig-name descname"><span class="pre">remove_destroy_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destroy_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><span class="pre">DestroyOperator</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.remove_destroy_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Remove a destroy operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>destroy_operator</strong> (<a class="reference internal" href="#routingblocks.DestroyOperator" title="routingblocks.DestroyOperator"><em>DestroyOperator</em></a>) – The operator to remove.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.remove_repair_operator">
+<span class="sig-name descname"><span class="pre">remove_repair_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repair_operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><span class="pre">RepairOperator</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.remove_repair_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Remove a repair operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>repair_operator</strong> (<a class="reference internal" href="#routingblocks.RepairOperator" title="routingblocks.RepairOperator"><em>RepairOperator</em></a>) – The operator to remove.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.reset_operator_weights">
+<span class="sig-name descname"><span class="pre">reset_operator_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.reset_operator_weights" title="Permalink to this definition"></a></dt>
+<dd><p>Reset the weights of all operators to 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.destroy_operators">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">destroy_operators</span></span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.destroy_operators" title="Permalink to this definition"></a></dt>
+<dd><p>Get an iterator over all registered destroy operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Iterator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="routingblocks.AdaptiveLargeNeighborhood.repair_operators">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repair_operators</span></span><a class="headerlink" href="#routingblocks.AdaptiveLargeNeighborhood.repair_operators" title="Permalink to this definition"></a></dt>
+<dd><p>Get an iterator over all registered repair operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Iterator</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="frvcp.html" class="btn btn-neutral float-left" title="Exact replenishment facility placement" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="auxilliary.html" class="btn btn-neutral float-right" title="Auxiliary algorithms and data structures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 - 2023, Patrick Sean Klein.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

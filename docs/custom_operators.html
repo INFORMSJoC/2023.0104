@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom operators &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7f9d500d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Custom problem settings" href="custom_problem_settings.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RoutingBlocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_problem_settings.html">Custom problem settings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instance.html">Problem instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact_facility_placement.html">Exact replenishment facility placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metaheuristic_components.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adptw.html">ADPTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="niftw.html">NIFTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alternatives.html">Alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribution opportunities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks class index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RoutingBlocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Custom operators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/custom_operators.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="custom-operators">
+<span id="id1"></span><h1>Custom operators<a class="headerlink" href="#custom-operators" title="Link to this heading"></a></h1>
+<p id="custom-destroy-operator">The example developed in the previous section so far uses only the standard operators RoutingBlocks provides out of the box. However, it is also possible to implement custom local search, destroy, and repair operators. We’ll implement a simple RouteRemoval destroy operator as an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom destory, repair, and local serach operators inherit from the DestroyOperator, RepairOperator, and Operator base classe, respectively, respectively.</span>
+<span class="k">class</span> <span class="nc">RouteRemoveOperator</span><span class="p">(</span><span class="n">routingblocks</span><span class="o">.</span><span class="n">DestroyOperator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">routingblocks</span><span class="o">.</span><span class="n">Random</span><span class="p">):</span>
+        <span class="c1"># Important: Do not use super()!</span>
+        <span class="n">routingblocks</span><span class="o">.</span><span class="n">DestroyOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rng</span> <span class="o">=</span> <span class="n">rng</span>
+
+    <span class="c1"># Returns true if the operator can be applied to the current solution</span>
+    <span class="k">def</span> <span class="nf">can_apply_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_solution</span><span class="p">:</span> <span class="n">routingblocks</span><span class="o">.</span><span class="n">Solution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">_solution</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+    <span class="c1"># Applies the operator to the current solution</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">:</span> <span class="n">routingblocks</span><span class="o">.</span><span class="n">Evaluation</span><span class="p">,</span> <span class="n">solution</span><span class="p">:</span> <span class="n">routingblocks</span><span class="o">.</span><span class="n">Solution</span><span class="p">,</span> <span class="n">number_of_removed_vertices</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span>
+        <span class="nb">int</span><span class="p">]:</span>
+        <span class="c1"># Try to remove random routes</span>
+        <span class="n">removed_customers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">removed_customers</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">number_of_removed_vertices</span><span class="p">:</span>
+            <span class="n">random_route_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">removed_customers</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">vertex_id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">[</span><span class="n">random_route_index</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">vertex</span><span class="o">.</span><span class="n">is_depot</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">solution</span><span class="p">[</span><span class="n">random_route_index</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">removed_customers</span>
+
+    <span class="c1"># Returns the operator&#39;s name</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;RouteRemoveOperator&quot;</span>
+</pre></div>
+</div>
+<p>The operator removes random routes from the solution until the desired number of vertices has been removed. Destroy operators implement the DestroyOperator interface. The interface requires implementation of the following methods:</p>
+<ul class="simple">
+<li><p>can_apply_to: Returns true if the operator can be applied to the current solution</p></li>
+<li><p>apply: Applies the operator to the current solution, returning the ids of the removed vertices</p></li>
+<li><p>name: Returns the operator’s name</p></li>
+</ul>
+<p>The operator can be registered with the ALNS solver in the same way as the standard operators:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">alns</span><span class="o">.</span><span class="n">add_destroy_operator</span><span class="p">(</span><span class="n">RouteRemoveOperator</span><span class="p">(</span><span class="n">randgen</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The same approach can be used to implement custom repair and local search operators. See <a class="reference internal" href="metaheuristic_components.html#alns-custom-operators"><span class="std std-ref">here</span></a> for further details on implementing destroy and repair operators, and <a class="reference internal" href="localsearch.html#local-search-custom-operators"><span class="std std-ref">here</span></a> for a comprehensive example of a custom local search operator.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom_problem_settings.html" class="btn btn-neutral float-right" title="Custom problem settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 - 2023, Patrick Sean Klein.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

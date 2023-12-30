@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classification &mdash; RoutingBlocks 01.04.2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid@9.4.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ADPTW" href="adptw.html" />
+    <link rel="prev" title="Auxiliary algorithms and data structures" href="auxilliary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RoutingBlocks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Basics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instance.html">Problem instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solution.html">Solution representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localsearch.html">Local search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frvcp.html">Exact station placement (FRVCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="alns.html">Metaheuristic components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auxilliary.html">Auxiliary algorithms and data structures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Problem settings</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Classification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#time-constraints">Time Constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#replenishment-time">Replenishment Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replenishment-process">Replenishment Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operational-resources">Operational Resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adptw.html">ADPTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="niftw.html">NIFTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="extension.html">Extending the library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full_api.html">Routingblocks Class Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RoutingBlocks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Classification</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/problem_classification.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="classification">
+<span id="id1"></span><h1>Classification<a class="headerlink" href="#classification" title="Permalink to this heading"></a></h1>
+<p>Routing problems involving intermediate stops are diverse and multifaceted. To navigate this complexity, these problems are categorized based on distinct characteristics. These classifications are not only instrumental in distinguishing between various problem variants and modeling constraints but also provide a foundational framework for understanding both shared and unique challenges associated with each variant.</p>
+<p>There are four main dimensions according to which vehicle routing problems with intermediate stops can be classified:</p>
+<section id="time-constraints">
+<h2>Time Constraints<a class="headerlink" href="#time-constraints" title="Permalink to this heading"></a></h2>
+<p>Routing problems often come with specific time restrictions that can be:</p>
+<ul class="simple">
+<li><p><strong>Time Windows (TW):</strong> Specific periods during which particular activities or stops must be completed.</p></li>
+<li><p><strong>Maximum Route Duration (MRD):</strong> A capped time within which the entire route should be completed.</p></li>
+<li><p><strong>None:</strong> Cases where time is not a constraint.</p></li>
+</ul>
+<section id="replenishment-time">
+<h3>Replenishment Time<a class="headerlink" href="#replenishment-time" title="Permalink to this heading"></a></h3>
+<p>The time associated with restocking operational resources can be:</p>
+<ul class="simple">
+<li><p><strong>Dependent (D):</strong> The time required depends on the quantity of the operational resource being replenished.</p></li>
+<li><p><strong>Independent (I):</strong> The replenishment time is constant, regardless of the quantity.</p></li>
+</ul>
+</section>
+<section id="replenishment-process">
+<h3>Replenishment Process<a class="headerlink" href="#replenishment-process" title="Permalink to this heading"></a></h3>
+<p>The nature of the replenishment varies, and can be:</p>
+<ul class="simple">
+<li><p><strong>Full Replenishment (F):</strong> All operational resources are fully restocked.</p></li>
+<li><p><strong>Partial Replenishment (P):</strong> Only a portion of the operational resources is replenished. This is typically not applicable for time-independent models.</p></li>
+</ul>
+</section>
+<section id="operational-resources">
+<h3>Operational Resources<a class="headerlink" href="#operational-resources" title="Permalink to this heading"></a></h3>
+<p>The consumption of operational resources can be:</p>
+<ul class="simple">
+<li><p><strong>Node-based (N):</strong> For resources like freight, consumed based on specific stops or nodes.</p></li>
+<li><p><strong>Arc-based (A):</strong> For resources like fuel, consumed continuously over the routes.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="auxilliary.html" class="btn btn-neutral float-left" title="Auxiliary algorithms and data structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="adptw.html" class="btn btn-neutral float-right" title="ADPTW" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 - 2023, Patrick Sean Klein.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

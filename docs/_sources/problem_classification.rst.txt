@@ -1,0 +1,41 @@
+.. _Classification:
+
+Classification
+======================
+
+Routing problems involving intermediate stops are diverse and multifaceted. To navigate this complexity, these problems are categorized based on distinct characteristics. These classifications are not only instrumental in distinguishing between various problem variants and modeling constraints but also provide a foundational framework for understanding both shared and unique challenges associated with each variant.
+
+There are four main dimensions according to which vehicle routing problems with intermediate stops can be classified:
+
+Time Constraints
+----------------
+
+Routing problems often come with specific time restrictions that can be:
+
+- **Time Windows (TW):** Specific periods during which particular activities or stops must be completed.
+- **Maximum Route Duration (MRD):** A capped time within which the entire route should be completed.
+- **None:** Cases where time is not a constraint.
+
+Replenishment Time
+""""""""""""""""""
+
+The time associated with restocking operational resources can be:
+
+- **Dependent (D):** The time required depends on the quantity of the operational resource being replenished.
+- **Independent (I):** The replenishment time is constant, regardless of the quantity.
+
+Replenishment Process
+""""""""""""""""""""
+
+The nature of the replenishment varies, and can be:
+
+- **Full Replenishment (F):** All operational resources are fully restocked.
+- **Partial Replenishment (P):** Only a portion of the operational resources is replenished. This is typically not applicable for time-independent models.
+
+Operational Resources
+""""""""""""""""""""
+
+The consumption of operational resources can be:
+
+- **Node-based (N):** For resources like freight, consumed based on specific stops or nodes.
+- **Arc-based (A):** For resources like fuel, consumed continuously over the routes.
